@@ -72,7 +72,7 @@ const Nav = () => {
         </a>
         <div className="hidden capitalize md:flex gap-8 text-lg">
           <a href="#why" className="hover:text-pink-500 transition-colors">
-            Why choose us
+            Why choose us davis
           </a>
           <a href="#how" className="hover:text-pink-500 transition-colors">
             How it works
