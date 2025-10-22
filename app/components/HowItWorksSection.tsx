@@ -11,6 +11,7 @@ import Image from "next/image";
 
 import teddy from "@/public/Teddy.svg";
 import Link from "next/link";
+import { IframeModal } from "./iframe-modal";
 // Update your interface
 interface Step {
   number: number;
@@ -24,21 +25,21 @@ const steps: Step[] = [
     number: 1,
     title: "Case",
     description:
-      "As you enter your venue, your phone will be placed in a Rooz case",
+      "As you enter your building, your phone will be placed in a Rooz case",
     imageUrl: lockIt,
   },
   {
     number: 2,
     title: "Lock",
     description:
-      "Once inside the case will lock. You'll keep your phone through out the show",
+      "Once inside the case will lock. You’ll keep your phone through the duration of the day",
     imageUrl: secureIt,
   },
   {
     number: 3,
     title: "Unlock ",
     description:
-      "To use your phone, tap it on  any unlocking base in the lobby",
+      "To use your phone, tap it on  any unlocking base in the designated station",
     imageUrl: learnFreely,
   },
 ];
@@ -76,12 +77,27 @@ const HowItWorksSection = () => {
 
   // Final scale: scale from 1 to 1.2 (bounce effect)
   const teddyScale = useTransform(scrollYProgress, [0.85, 1], [1, 1.4]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section
       ref={sectionRef}
       id="how"
       className={`relative bg-black  text-white pb-32 pt-20 px-6 ${NeueMontreal.className}`}
     >
+      <iframe
+        src="https://cal.com/sarah-spirer-myrooz"
+        style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+        allow="geolocation"
+        aria-hidden="true"
+      />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <h2 className="text-4xl md:text-6xl font-medium text-center mb-12 md:mb-20">
@@ -171,16 +187,20 @@ const HowItWorksSection = () => {
             focus.
           </p>
           <div className="mt-6">
-            <Link
-              href={"https://calendly.com/sspirer-myrooz"}
-              target="_blank"
+            <button
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
               className=" px-10  capitalize font-bold py-3 cursor-pointer bg-gradient-to-r from-pink-500 to-pink-600 rounded-full hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg shadow-pink-500/50"
             >
               Get in touch
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Render modal when open */}
+      {isModalOpen && <IframeModal onClose={() => setIsModalOpen(false)} />}
     </section>
   );
 };

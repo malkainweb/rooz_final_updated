@@ -115,6 +115,9 @@ export default function RootLayout({
         {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+        <link rel="preconnect" href="https://cal.com" />
+        <link rel="dns-prefetch" href="https://cal.com" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

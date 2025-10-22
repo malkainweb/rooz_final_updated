@@ -10,6 +10,7 @@ import { Instagram, Linkedin } from "lucide-react";
 import Image from "next/image";
 import { NeueMontreal } from "../util/font";
 import Link from "next/link";
+import { IframeModal } from "./iframe-modal";
 
 // Social media links data
 const socialLinks = [
@@ -67,12 +68,26 @@ const Footer = () => {
   const MobileScale = useTransform(mobileProgress, [0, 1], [1, 0.5]);
   const MobileTop = useTransform(mobileProgress, [0, 1], ["-70%", "-210%"]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <div
         ref={footerContainer}
         className={`w-full overflow-clip   relative justify-between flex flex-col  md:w-[200rem] max-w-full mx-auto font-medium md:pt-0 pt-[30vw]  md:min-h-[150vh] ${NeueMontreal.className}`}
       >
+        <iframe
+          src="https://cal.com/sarah-spirer-myrooz"
+          style={{
+            position: "absolute",
+            width: "1px",
+            height: "1px",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+          allow="geolocation"
+          aria-hidden="true"
+        />
         <div className=" md:flex   hidden justify-center items-center top-0 h-[100vh] sticky w-full">
           <motion.div
             className=" w-full relative gap-7  items-center flex-col  flex "
@@ -95,12 +110,14 @@ const Footer = () => {
               Ready to get started?
             </p>
 
-            <Link
-              href={"https://calendly.com/sspirer-myrooz"}
+            <button
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
               className="bg-gradient-to-r z-[10] invisible  w-fit cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
             >
               GET IN TOUCH
-            </Link>
+            </button>
           </motion.div>
         </div>
         <div
@@ -138,13 +155,14 @@ const Footer = () => {
                 Ready to get started?
               </p>
 
-              <Link
-                href={"https://calendly.com/sspirer-myrooz"}
-                target="_blank"
+              <button
+                onClick={() => {
+                  setIsModalOpen(true);
+                }}
                 className="bg-gradient-to-r z-[10] w-fit cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
               >
                 GET IN TOUCH
-              </Link>
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -155,13 +173,14 @@ const Footer = () => {
             get started?
           </p>
 
-          <Link
-            href={"https://calendly.com/sspirer-myrooz"}
-            target="_blank"
+          <button
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
             className="bg-gradient-to-r z-[10]  w-fit cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
           >
             GET IN TOUCH
-          </Link>
+          </button>
         </div>
         <div className="w-full md:bg-transparent  bg-[#1F1F1F] md:mt-[60vh] z-[100]  flex relative md:py-20 py-14 ">
           <motion.div
@@ -194,6 +213,14 @@ const Footer = () => {
             </h2>
 
             <div className="flex  mt-10 md:mt-16 gap-3 flex-col">
+              {/* Email Link */}
+              <a
+                href="mailto:hello@myrooz.com"
+                className="text-white text-lg hover:text-pink-500 transition-colors underline"
+              >
+                hello@myrooz.com
+              </a>
+
               {/* Copyright */}
               <p className="text-white text-lg">@Rooz 2025</p>
 
@@ -215,6 +242,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* Render modal when open */}
+        {isModalOpen && <IframeModal onClose={() => setIsModalOpen(false)} />}
       </div>
     </>
   );
