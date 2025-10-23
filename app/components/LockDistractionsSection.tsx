@@ -33,11 +33,20 @@ const LockDistractionsSection = () => {
   const stats: StatCard[] = [
     {
       icon: schoolLeaders,
-      mainStat: "73% of U.S. school leaders say phones hurt attention span",
+      mainStat: "73% of U.S. school leaders say phones hurt attention span.",
       title: "",
       subStat: "98%",
       subText: "Less distractions with ROOZ",
       bgColor: "bg-[#B46BF2]",
+    },
+
+    {
+      icon: usTeachers,
+      mainStat: "72% of U.S. teachers say cellphones distract in class.",
+      title: "",
+      subStat: "94%",
+      subText: "Increased concentration with ROOZ",
+      bgColor: "bg-[#E04A3A]",
     },
     {
       icon: span,
@@ -46,14 +55,6 @@ const LockDistractionsSection = () => {
       subStat: "84%",
       subText: "Focus increase with ROOZ",
       bgColor: "bg-[#2C9B45]",
-    },
-    {
-      icon: usTeachers,
-      mainStat: "72% of U.S. teachers say cellphones distract in class.",
-      title: "",
-      subStat: "94%",
-      subText: "Increased concentration with ROOZ",
-      bgColor: "bg-[#E04A3A]",
     },
   ];
 

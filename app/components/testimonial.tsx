@@ -35,24 +35,24 @@ const TestimonialsSection = () => {
       role: "Principal, Lincoln Elementary",
       avatar: "https://i.pravatar.cc/150?img=12",
     },
-    {
-      text: "As an educator for 15 years, I've never seen a tool that connects with students like ROOZ does. It's intuitive, effective, and truly makes a difference. My students are more engaged, more confident, and more excited about learning than ever before. The adaptive learning technology meets each student where they are and challenges them appropriately. I've watched shy students become classroom leaders and struggling learners develop genuine confidence in their abilities. ROOZ has revolutionized my teaching approach.",
-      author: "Sarah J.",
-      role: "Teacher, Riverside School",
-      avatar: "https://i.pravatar.cc/150?img=5",
-    },
+    // {
+    //   text: "As an educator for 15 years, I've never seen a tool that connects with students like ROOZ does. It's intuitive, effective, and truly makes a difference. My students are more engaged, more confident, and more excited about learning than ever before. The adaptive learning technology meets each student where they are and challenges them appropriately. I've watched shy students become classroom leaders and struggling learners develop genuine confidence in their abilities. ROOZ has revolutionized my teaching approach.",
+    //   author: "Sarah J.",
+    //   role: "Teacher, Riverside School",
+    //   avatar: "https://i.pravatar.cc/150?img=5",
+    // },
     {
       text: "The impact ROOZ has had on our son's learning journey is remarkable. Not only have his grades improved, but his attitude toward school has completely changed. He's become more independent, more curious, and genuinely enjoys tackling challenging subjects. We used to battle over homework every night, but now he voluntarily logs in to complete assignments. The gamification elements keep him motivated without feeling overwhelming. As parents, we finally feel like we have visibility into his progress and can support him effectively.",
       author: "David L.",
       role: "Father of a 5th grader",
       avatar: "https://i.pravatar.cc/150?img=8",
     },
-    {
-      text: "Implementing ROOZ across our district was one of the best decisions we've made. The platform's ability to track individual student progress while providing district-wide analytics has been invaluable. We've seen measurable improvements in standardized test scores and student engagement metrics. Teachers report spending less time on administrative tasks and more time on actual instruction. The parent communication features have strengthened our home-school connection significantly. ROOZ truly delivers on its promise of supporting every stakeholder in the education ecosystem.",
-      author: "Dr. Patricia Chen",
-      role: "District Superintendent",
-      avatar: "https://i.pravatar.cc/150?img=9",
-    },
+    // {
+    //   text: "Implementing ROOZ across our district was one of the best decisions we've made. The platform's ability to track individual student progress while providing district-wide analytics has been invaluable. We've seen measurable improvements in standardized test scores and student engagement metrics. Teachers report spending less time on administrative tasks and more time on actual instruction. The parent communication features have strengthened our home-school connection significantly. ROOZ truly delivers on its promise of supporting every stakeholder in the education ecosystem.",
+    //   author: "Dr. Patricia C.",
+    //   role: "District Superintendent",
+    //   avatar: "https://i.pravatar.cc/150?img=9",
+    // },
     {
       text: "My daughter has always struggled with math anxiety, but ROOZ's approach has been transformative. The platform breaks down complex concepts into manageable steps and celebrates small victories along the way. She's gone from dreading math class to actually enjoying problem-solving. Her confidence has soared, and she's even considering pursuing STEM subjects in high school. The progress reports help me understand exactly what she's learning and how I can support her at home. ROOZ has given our family hope and my daughter a genuine love for learning.",
       author: "Jennifer M.",
@@ -61,13 +61,13 @@ const TestimonialsSection = () => {
     },
     {
       text: "Working with special education students requires tools that can truly differentiate instruction, and ROOZ exceeds expectations. The platform adapts to each student's unique learning style and pace, providing the individualized support that's often difficult to deliver in a traditional classroom setting. I've seen non-verbal students engage with content in ways I never thought possible. The accessibility features are thoughtfully designed, and the data tracking helps me demonstrate progress to parents and administrators. ROOZ has become an essential part of my instructional toolkit.",
-      author: "Marcus Williams",
+      author: "Marcus W.",
       role: "Special Education Teacher",
       avatar: "https://i.pravatar.cc/150?img=13",
     },
     {
       text: "As a school counselor, I've witnessed firsthand how ROOZ supports not just academic growth but also social-emotional development. The platform's emphasis on growth mindset and celebrating effort over perfection has helped reduce student anxiety around performance. Students feel safe to take risks and make mistakes, which is crucial for learning. The insights I gain from ROOZ help me identify students who might be struggling emotionally before it impacts their academics. It's more than just an educational tool—it's a comprehensive support system for the whole child.",
-      author: "Amanda Rodriguez",
+      author: "Amanda R.",
       role: "School Counselor",
       avatar: "https://i.pravatar.cc/150?img=16",
     },
