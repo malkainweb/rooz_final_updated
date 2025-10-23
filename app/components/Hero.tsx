@@ -58,24 +58,24 @@ const Hero = () => {
             <Image
               src={pouchTop}
               alt="pouch top"
-              className="md:w-[30%] w-[80%] md:translate-x-[-3%] translate-x-[-2%] translate-y-[10%] md:translate-y-[10%] h-auto"
+              className="md:w-[28.2%] w-[84%]  translate-y-[13%] md:translate-y-[14%] h-auto"
             />
             <Image
               src={pouchBottom}
               alt="pouch bottom"
-              className="md:w-[25%] w-[75%] opacity-0 h-auto"
+              className="md:w-[30%] w-[90%] opacity-0 h-auto"
             />
           </div>
           <div className="w-full flex-col absolute items-center bottom-0 left-[50%] translate-x-[-50%] flex justify-center z-[1000]">
             <Image
               src={pouchTop}
               alt="pouch top"
-              className="md:w-[28%] w-[80%] opacity-0 h-auto"
+              className="md:w-[30%] w-[80%] opacity-0 h-auto"
             />
             <Image
               src={pouchBottom}
               alt="pouch bottom"
-              className="md:w-[25%] w-[75%] h-auto"
+              className="md:w-[30%] w-[90%] h-auto"
             />
           </div>
           <div className="w-full flex-col gap-9 text-center md:text-start justify-center flex md:pl-[6%] md:h-[100vh]">
