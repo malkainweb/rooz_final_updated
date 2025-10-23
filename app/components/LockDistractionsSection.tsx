@@ -36,7 +36,7 @@ const LockDistractionsSection = () => {
       mainStat:
         "Behavior referrals dropped significantly after ROOZ implementation.",
       title: "Behavior",
-      subStat: "44%",
+      subStat: "-44%",
       subText: "Decrease in monthly behavioral referrals",
       bgColor: "bg-[#B46BF2]",
     },
@@ -111,7 +111,7 @@ const LockDistractionsSection = () => {
                 duration: 3,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className={`${stat.bgColor} overflow-hidden  rounded-[15px] w-full md:w-[10rem] flex flex-col justify-between items-center text-center px-2 py-4`}
+              className={`${stat.bgColor} overflow-hidden  rounded-[15px] w-full md:w-[10rem] flex flex-col justify-between h-[400px] items-center text-center px-2 py-4`}
             >
               {/* Icon */}
               <Image
@@ -120,12 +120,13 @@ const LockDistractionsSection = () => {
                 alt={stat.mainStat}
                 className="w-16 h-16"
               />
-              <div
+              {/* <div
                 style={{
-                  height: index === 0 ? "180px" : index === 1 ? "30px" : "90px",
+                  height:
+                    index === 0 ? "180px" : index === 1 ? "180px" : "180px",
                 }}
                 className=""
-              ></div>
+              ></div> */}
 
               <div
                 // style={{ opacity: !isInView ? 0 : 1, transition: "1.5s " }}
