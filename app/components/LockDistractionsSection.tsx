@@ -33,31 +33,31 @@ const LockDistractionsSection = () => {
   const stats: StatCard[] = [
     {
       icon: schoolLeaders,
-      mainStat: "73% of U.S. school leaders say phones hurt attention span.",
-      title: "",
-      subStat: "98%",
-      subText: "Less distractions with ROOZ",
+      mainStat:
+        "Behavior referrals dropped significantly after ROOZ implementation.",
+      title: "Behavior",
+      subStat: "44%",
+      subText: "Decrease in monthly behavioral referrals",
       bgColor: "bg-[#B46BF2]",
     },
-
     {
       icon: usTeachers,
-      mainStat: "72% of U.S. teachers say cellphones distract in class.",
-      title: "",
-      subStat: "94%",
-      subText: "Increased concentration with ROOZ",
+      mainStat:
+        "Students showed measurable improvement in passing grades with ROOZ.",
+      title: "Grades",
+      subStat: "+14.9%",
+      subText: "Increase in probability of earning a passing grade",
       bgColor: "bg-[#E04A3A]",
     },
     {
       icon: span,
-      mainStat: "53% say phones harm academic performance.",
-      title: "",
-      subStat: "84%",
-      subText: "Focus increase with ROOZ",
+      mainStat: "Banning phones with ROOZ led to higher exam performance.",
+      title: "Focus",
+      subStat: "~6%",
+      subText: "Higher exam scores overall",
       bgColor: "bg-[#2C9B45]",
     },
   ];
-
   const images = [
     four, // Students walking outside
     one, // Students in hallway
@@ -111,7 +111,7 @@ const LockDistractionsSection = () => {
                 duration: 3,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className={`${stat.bgColor} overflow-hidden  rounded-[15px] w-full md:w-[9rem] flex flex-col justify-between items-center text-center px-2 py-4`}
+              className={`${stat.bgColor} overflow-hidden  rounded-[15px] w-full md:w-[10rem] flex flex-col justify-between items-center text-center px-2 py-4`}
             >
               {/* Icon */}
               <Image
