@@ -33,7 +33,7 @@ const LockDistractionsSection = () => {
   const stats: StatCard[] = [
     {
       icon: schoolLeaders,
-      mainStat: "73% of U.S. school leaders say phones hurt",
+      mainStat: "73% of U.S. school leaders say phones hurt attention span",
       title: "",
       subStat: "98%",
       subText: "Less distractions with ROOZ",
