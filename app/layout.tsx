@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
 
-  metadataBase: new URL("https://yourwebsite.com"), // Replace with your actual domain
+  metadataBase: new URL("https://myrooz.com"), // Replace with your actual domain
 
   alternates: {
     canonical: "/",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourwebsite.com", // Replace with your actual domain
+    url: "https://myrooz.com", // Replace with your actual domain
     siteName: "ROOZ",
     title:
       "ROOZ - Secure Phone Pouches for Schools | Focus & Learning Solutions",
