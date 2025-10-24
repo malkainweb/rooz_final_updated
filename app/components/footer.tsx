@@ -76,6 +76,12 @@ const Footer = () => {
         ref={footerContainer}
         className={`w-full overflow-clip   relative justify-between flex flex-col  md:w-[200rem] max-w-full mx-auto font-medium md:pt-0 pt-[30vw]  md:min-h-[150vh] ${NeueMontreal.className}`}
       >
+        <a
+          href="https://www.malkain.com"
+          className={`hover:text-white absolute bottom-5 z-[1000] right-[50%] md:translate-x-0 translate-x-[50%] md:right-5 font-medium  underline underline-offset-4  capitalize text-xs md:text-sm text-white/50 `}
+        >
+          Designed and developed by Malkain
+        </a>
         <iframe
           src="https://cal.com/sarah-spirer-myrooz"
           style={{
