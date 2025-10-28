@@ -3,71 +3,63 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { NeueMontreal } from "../util/font";
-import { Image as ImageIcon, GraduationCap, FileText } from "lucide-react";
-
 import one from "@/public/lookDistractions/one.webp";
 import two from "@/public/lookDistractions/two.webp";
 import three from "@/public/lookDistractions/three.webp";
 import four from "@/public/lookDistractions/four.webp";
 import Image from "next/image";
 import SlowCharacterReveal from "./SlowCharacterReveal";
-
 import schoolLeaders from "@/public/lookDistractions/schoolLeaders.svg";
-import span from "@/public/lookDistractions/span.svg";
-import usTeachers from "@/public/lookDistractions/usTeachers.svg";
+import { urlFor } from "@/app/sanity/lib/image";
+import { SanitySiteHeaders, SanityStatCard } from "../sanity/lib/types";
 
 interface StatCard {
-  icon: any; // StaticImageData
+  icon: any; // Can be StaticImageData or string URL
   mainStat: string;
   title: string;
   subStat: string;
   subText: string;
   bgColor: string;
 }
-const LockDistractionsSection = () => {
+
+interface LockDistractionsSectionProps {
+  statCards: SanityStatCard[];
+  siteHeaders?: SanitySiteHeaders;
+}
+
+const LockDistractionsSection = ({
+  statCards,
+  siteHeaders,
+}: LockDistractionsSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, {
     once: false,
     margin: "-20% 0px -10% 0px",
   });
-  const stats: StatCard[] = [
-    {
-      icon: schoolLeaders,
-      mainStat:
-        "Behavior referrals dropped significantly after ROOZ implementation.",
-      title: "Behavior",
-      subStat: "-44%",
-      subText: "Decrease in monthly behavioral referrals",
-      bgColor: "bg-[#B46BF2]",
-    },
-    {
-      icon: usTeachers,
-      mainStat:
-        "Students showed measurable improvement in passing grades with ROOZ.",
-      title: "Grades",
-      subStat: "+14.9%",
-      subText: "Increase in probability of earning a passing grade",
-      bgColor: "bg-[#E04A3A]",
-    },
-    {
-      icon: span,
-      mainStat: "Banning phones with ROOZ led to higher exam performance.",
-      title: "Focus",
-      subStat: "-6%",
-      subText: "Higher exam scores overall",
-      bgColor: "bg-[#2C9B45]",
-    },
-  ];
+
+  // Transform Sanity stat cards to component format
+  const stats: StatCard[] = statCards.map((card) => ({
+    icon: card.icon
+      ? urlFor(card.icon).width(64).height(64).url()
+      : schoolLeaders,
+    mainStat: card.mainStat,
+    title: card.title,
+    subStat: card.subStat,
+    subText: card.subText,
+    bgColor: card.bgColor,
+  }));
+
   const images = [
     four, // Students walking outside
     one, // Students in hallway
     three, // Students studying together (yellow shirt)
     two, // Students reading (striped shirt & green)
   ];
+
   return (
-    <section className="relative bg-black  text-white py-20 px-6 overflow-hidden">
+    <section className="relative bg-black text-white py-20 px-6 overflow-hidden">
       <div
-        className={` font-medium max-w-7xl mx-auto ${NeueMontreal.className}`}
+        className={`font-medium max-w-7xl mx-auto ${NeueMontreal.className}`}
       >
         {/* Top Images Row */}
         <div className="flex justify-center md:px-0 px-[10%] gap-3 mb-5">
@@ -88,22 +80,21 @@ const LockDistractionsSection = () => {
           ))}
         </div>
 
+        {/* Header */}
         <h1 className="text-4xl text-center mb-10 md:text-6xl leading-[105%]">
-          Lock away distractions. <br className="md:block hidden" /> Unlock
-          potential.
+          {siteHeaders?.lockDistractionsHeader ||
+            "Lock away distractions. Unlock potential."}
         </h1>
-
-        {/* Stats Cards */}
 
         {/* Stat Cards */}
         <div
           ref={sectionRef}
-          className="flex flex-row justify-center items-end gap-2 mt-20  mb-7"
+          className="flex flex-row justify-center items-end gap-2 mt-20 mb-7"
         >
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              // initial={{ maxHeight: "30px" }}
+              style={{ backgroundColor: stat.bgColor }}
               animate={{
                 maxHeight: isInView ? "1000px" : "50px",
               }}
@@ -111,39 +102,38 @@ const LockDistractionsSection = () => {
                 duration: 3,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className={`${stat.bgColor} overflow-hidden  rounded-[15px] w-full md:w-[10rem] flex flex-col justify-between h-[400px] items-center text-center px-2 py-4`}
+              className={`overflow-hidden rounded-[15px] w-full md:w-[10rem] flex flex-col justify-between h-[400px] items-center text-center px-2 py-4`}
             >
               {/* Icon */}
-              <Image
-                style={{ opacity: !isInView ? 0 : 1, transition: "1s " }}
-                src={stat.icon}
-                alt={stat.mainStat}
-                className="w-16 h-16"
-              />
-              {/* <div
-                style={{
-                  height:
-                    index === 0 ? "180px" : index === 1 ? "180px" : "180px",
-                }}
-                className=""
-              ></div> */}
+              {typeof stat.icon === "string" ? (
+                <img
+                  style={{ opacity: !isInView ? 0 : 1, transition: "1s " }}
+                  src={stat.icon}
+                  alt={stat.mainStat}
+                  className="w-16 h-16"
+                />
+              ) : (
+                <Image
+                  style={{ opacity: !isInView ? 0 : 1, transition: "1s " }}
+                  src={stat.icon}
+                  alt={stat.mainStat}
+                  className="w-16 h-16"
+                />
+              )}
 
-              <div
-                // style={{ opacity: !isInView ? 0 : 1, transition: "1.5s " }}
-                className="flex flex-col"
-              >
+              <div className="flex flex-col">
                 {/* Title Text */}
-                <p className="text-sm leading-[120%]  mb-4 text-white">
+                <p className="text-sm leading-[120%] mb-4 text-white">
                   {stat.mainStat}
                 </p>
 
                 {/* Divider */}
-                <div className=" h-[1px] w-[90%] mx-auto bg-white/30 mb-4" />
+                <div className="h-[1px] w-[90%] mx-auto bg-white/30 mb-4" />
 
                 {/* Bottom Stats */}
                 <div className="">
-                  <div className="text-xl font-semibold ">{stat.subStat}</div>
-                  <p className="text-xs leading-[120%] bg-[#ffffff16] font-normal  opacity-50">
+                  <div className="text-xl font-semibold">{stat.subStat}</div>
+                  <p className="text-xs leading-[120%] bg-[#ffffff16] font-normal opacity-50">
                     {stat.subText}
                   </p>
                 </div>
@@ -152,10 +142,17 @@ const LockDistractionsSection = () => {
           ))}
         </div>
 
+        {/* Bottom Text */}
         <SlowCharacterReveal
-          text="Locked phones help students focus,<br/> teachers engage, and classrooms <br/>become spaces for growth."
-          desktopText="Locked phones help students focus,<br/> teachers engage, and classrooms <br/>become spaces for growth."
-          className="text-lg md:text-2xl  text-center font-medium leading-[105%]"
+          text={
+            siteHeaders?.lockDistractionsSubheader ||
+            "Locked phones help students focus,<br/> teachers engage, and classrooms <br/>become spaces for growth."
+          }
+          desktopText={
+            siteHeaders?.lockDistractionsSubheader ||
+            "Locked phones help students focus,<br/> teachers engage, and classrooms <br/>become spaces for growth."
+          }
+          className="text-lg md:text-2xl w-[35rem] mx-auto max-w-[90%] text-center font-medium leading-[105%]"
           highlightedColor="#ffffff"
           fadedColor="#333333"
         />

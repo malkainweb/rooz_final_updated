@@ -11,6 +11,11 @@ import Image from "next/image";
 import { NeueMontreal } from "../util/font";
 import Link from "next/link";
 import { IframeModal } from "./iframe-modal";
+import { SanitySiteHeaders } from "../sanity/lib/types";
+
+interface FooterProps {
+  siteHeaders?: SanitySiteHeaders;
+}
 
 // Social media links data
 const socialLinks = [
@@ -27,7 +32,7 @@ const socialLinks = [
     ariaLabel: "Follow us on LinkedIn",
   },
 ];
-const Footer = () => {
+const Footer = ({ siteHeaders }: FooterProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const footerContainer = useRef<HTMLDivElement>(null);
 
@@ -113,7 +118,7 @@ const Footer = () => {
             </motion.div>
 
             <p className="text-5xl invisible  md:text-[clamp(5rem,9vw,10rem)]  z-[10] mx-auto whitespace-nowrap">
-              Ready to get started?
+              {siteHeaders?.footerCtaHeader || "Ready to get started?"}
             </p>
 
             <button
@@ -158,7 +163,7 @@ const Footer = () => {
               </motion.div>
 
               <p className="text-5xl md:text-[clamp(5rem,9vw,10rem)]  z-[10] mx-auto whitespace-nowrap">
-                Ready to get started?
+                {siteHeaders?.footerCtaHeader || "Ready to get started?"}
               </p>
 
               <button
@@ -175,8 +180,7 @@ const Footer = () => {
 
         <div className="  md:hidden flex  z-[1000] flex-col items-center gap-4 mb-[60%]">
           <p className="text-[14vw] leading-[105%] text-center   z-[10] mx-auto">
-            Ready to <br />
-            get started?
+            {siteHeaders?.footerCtaHeader || "Ready to get started?"}
           </p>
 
           <button

@@ -8,8 +8,13 @@ import pouchBottom from "@/public/hero/pouchBottom.webp";
 import Image from "next/image";
 import { NeueMontreal } from "../util/font";
 import SlowCharacterReveal from "./SlowCharacterReveal";
+import { SanitySiteHeaders } from "../sanity/lib/types";
 
-const Hero = () => {
+interface HeroProps {
+  siteHeaders?: SanitySiteHeaders;
+}
+
+const Hero = ({ siteHeaders }: HeroProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -79,24 +84,24 @@ const Hero = () => {
             />
           </div>
           <div className="w-full flex-col gap-9 text-center md:text-start justify-center flex md:pl-[6%] md:h-[100vh]">
-            <h1 className="md:text-7xl text-4xl">
-              Unlock students <br />
-              full potential.
+            <h1 className="md:text-7xl w-[34rem] max-w-full text-4xl">
+              {siteHeaders?.heroTitle || "Unlock students full potential."}
             </h1>
 
-            <div className="opacity-70 md:opacity-100">
+            <div className="opacity-70 w-[30rem] max-w-[90%] md:opacity-100">
               <SlowCharacterReveal
-                text="At ROOZ, we unlock students' potential by  <br/> minimizing distractions. Our secure pouches  <br/> support phone bans, helping students focus  <br/>  and teachers teach uninterrupted."
-                desktopText="At ROOZ, we unlock students' potential by minimizing <br/> distractions. Our secure pouches support phone bans, <br/> helping students focus and teachers teach uninterrupted."
-                className="md:text-lg md:block hidden text-[4vw] md:text-white md:text-start text-center leading-[130%]"
+                text={
+                  siteHeaders?.heroSubtitle ||
+                  "At ROOZ, we unlock students potential by minimizing distractions. Our secure pouches support phone bans."
+                }
+                className="text-lg md:block hidden leading-[120%]"
                 highlightedColor="#ffffff"
                 fadedColor="#333333"
               />
 
               <p className="md:hidden">
-                At ROOZ, we unlock students&apos; potential by <br /> minimizing
-                distractions. Our secure pouches <br /> support phone bans,
-                helping students focus <br /> and teachers teach uninterrupted.
+                {siteHeaders?.heroSubtitle ||
+                  "At ROOZ, we unlock students' potential by minimizing distractions. Our secure pouches support phone bans, helping students focus and teachers teach uninterrupted."}
               </p>
             </div>
           </div>

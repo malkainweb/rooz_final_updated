@@ -5,12 +5,28 @@ import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 
+interface HomeUspAnimationProps {
+  siteHeaders?: SanitySiteHeaders;
+}
+
 import { gsap } from "gsap";
 
 import effortless from "@/public/WhyChooseUs/effortless.webp";
 import smartTechnology from "@/public/WhyChooseUs/smartTechnology.webp";
 import { NeueMontreal } from "../util/font";
+import { SanitySiteHeaders, SanityWhyChooseUsCard } from "../sanity/lib/types";
+import { urlFor } from "../sanity/lib/image";
 
+interface HomeUspAnimationProps {
+  siteHeaders?: SanitySiteHeaders;
+  cards: SanityWhyChooseUsCard[];
+}
+
+interface CardItem {
+  img: any;
+  heading: string;
+  body: string;
+}
 const Items = [
   {
     img: smartTechnology,
@@ -24,7 +40,15 @@ const Items = [
   },
 ];
 
-const HomeUspAnimation = () => {
+const HomeUspAnimation = ({ siteHeaders, cards }: HomeUspAnimationProps) => {
+  // Transform Sanity cards to component format
+  const Items: CardItem[] = cards.map((card) => ({
+    img: card.image
+      ? urlFor(card.image).width(800).height(600).url()
+      : smartTechnology,
+    heading: card.heading,
+    body: card.body,
+  }));
   const sectionRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -76,8 +100,8 @@ const HomeUspAnimation = () => {
           index + 1 - yvalue >= 0 && index + 1 - yvalue <= 1
             ? 1
             : index + 1 - yvalue <= 0
-            ? 1
-            : 0,
+              ? 1
+              : 0,
         transform:
           index + 1 - yvalue >= 0 && index + 1 - yvalue <= 1
             ? `translateY(${
@@ -85,25 +109,27 @@ const HomeUspAnimation = () => {
                 (calwidth < 765 ? 135 : 150) * (-index + yvalue)
               }%) translateX(-50%)`
             : index + 1 - yvalue <= 0
-            ? `translateY(${
-                -(calwidth < 765 ? 40 : 50) -
-                (yvalue - (index + 1)) * (calwidth < 765 ? 12 / 1.7 : 1 / 1)
-              }%) translateX(-50%) scale(${calculateScale(
-                index,
-                dynamicArray_scaling,
-                yvalue
-              )})`
-            : `translateY(${yvalue + 1 + index * 100}%) translateX(-50%)`,
+              ? `translateY(${
+                  -(calwidth < 765 ? 40 : 50) -
+                  (yvalue - (index + 1)) * (calwidth < 765 ? 12 / 1.7 : 1 / 1)
+                }%) translateX(-50%) scale(${calculateScale(
+                  index,
+                  dynamicArray_scaling,
+                  yvalue
+                )})`
+              : `translateY(${yvalue + 1 + index * 100}%) translateX(-50%)`,
         duration: 0.4,
       });
     });
   }, [yvalue]);
 
+  console.log(Items);
+
   return (
     <>
       {/* Header */}
       <h2 className="text-4xl md:text-5xl font-medium text-center   ">
-        Why choose us{" "}
+        {siteHeaders?.whyChooseUsHeader || "Why choose us"}{" "}
       </h2>
       <section
         id="why"
@@ -133,6 +159,7 @@ const HomeUspAnimation = () => {
                     height={600}
                     className="w-full h-full  object-cover"
                     priority={index === 0}
+                    unoptimized
                   />
                 </figure>
 

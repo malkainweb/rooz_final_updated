@@ -7,9 +7,7 @@ interface SlowCharacterRevealProps {
   className?: string;
   highlightedColor?: string;
   fadedColor?: string;
-  // New props for responsive breaks
   desktopText?: string; // Optional separate text for desktop
-  mobileBreakpoints?: number[]; // Array of character indices where mobile should break
 }
 
 const SlowCharacterReveal: React.FC<SlowCharacterRevealProps> = ({
@@ -18,7 +16,6 @@ const SlowCharacterReveal: React.FC<SlowCharacterRevealProps> = ({
   highlightedColor = "#E9F7FF",
   fadedColor = "#4A6170",
   desktopText,
-  mobileBreakpoints = [],
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [revealProgress, setRevealProgress] = useState(0);
@@ -46,47 +43,33 @@ const SlowCharacterReveal: React.FC<SlowCharacterRevealProps> = ({
     setRevealProgress(latest);
   });
 
-  // Calculate lines and character positions based on screen size
-  const { lines, totalChars } = useMemo(() => {
+  // Calculate lines and words based on screen size
+  const { lines, totalWords } = useMemo(() => {
     // Use desktopText for desktop if provided, otherwise use main text
     const textToUse = !isMobile && desktopText ? desktopText : text;
 
-    if (isMobile && mobileBreakpoints.length > 0) {
-      // For mobile, create breaks at specified character indices
-      const cleanText = text.replace(/<br\/?>/g, ""); // Remove existing breaks
-      const mobileLines: string[] = [];
-      let startIndex = 0;
+    // Split by line breaks
+    const splitLines = textToUse.split(/<br\/?>/);
 
-      // Sort breakpoints to ensure correct order
-      const sortedBreakpoints = [...mobileBreakpoints].sort((a, b) => a - b);
+    // Split each line into words and count total words
+    const linesWithWords = splitLines.map((line) => {
+      // Split by spaces and filter out empty strings
+      return line
+        .trim()
+        .split(/\s+/)
+        .filter((word) => word.length > 0);
+    });
 
-      sortedBreakpoints.forEach((breakpoint) => {
-        if (breakpoint > startIndex && breakpoint <= cleanText.length) {
-          mobileLines.push(cleanText.slice(startIndex, breakpoint));
-          startIndex = breakpoint;
-        }
-      });
+    const totalWordCount = linesWithWords.reduce(
+      (acc, lineWords) => acc + lineWords.length,
+      0
+    );
 
-      // Add remaining text
-      if (startIndex < cleanText.length) {
-        mobileLines.push(cleanText.slice(startIndex));
-      }
-
-      return {
-        lines: mobileLines,
-        totalChars: cleanText.length,
-      };
-    } else {
-      // For desktop or when no mobile breakpoints specified
-      const splitLines = textToUse.split(/<br\/?>/);
-      const totalCharCount = textToUse.replace(/<br\/?>/g, "").length;
-
-      return {
-        lines: splitLines,
-        totalChars: totalCharCount,
-      };
-    }
-  }, [text, desktopText, isMobile, mobileBreakpoints]);
+    return {
+      lines: linesWithWords,
+      totalWords: totalWordCount,
+    };
+  }, [text, desktopText, isMobile]);
 
   // Helper function to interpolate between colors
   const interpolateColor = (
@@ -128,53 +111,54 @@ const SlowCharacterReveal: React.FC<SlowCharacterRevealProps> = ({
     return `rgb(${r}, ${g}, ${b})`;
   };
 
-  // Get color for a specific character based on its position
-  const getCharacterColor = (charIndex: number) => {
-    // Calculate when this character should start and finish highlighting
-    const charStart = charIndex / totalChars;
-    const charEnd = (charIndex + 1) / totalChars;
+  // Get color for a specific word based on its position
+  const getWordColor = (wordIndex: number) => {
+    // Calculate when this word should start and finish highlighting
+    const wordStart = wordIndex / totalWords;
+    const wordEnd = (wordIndex + 1) / totalWords;
 
-    // Calculate progress for this specific character
-    let charProgress = 0;
-    if (revealProgress >= charEnd) {
-      charProgress = 1; // Fully highlighted
-    } else if (revealProgress >= charStart) {
-      charProgress = (revealProgress - charStart) / (charEnd - charStart);
+    // Calculate progress for this specific word
+    let wordProgress = 0;
+    if (revealProgress >= wordEnd) {
+      wordProgress = 1; // Fully highlighted
+    } else if (revealProgress >= wordStart) {
+      wordProgress = (revealProgress - wordStart) / (wordEnd - wordStart);
     }
 
-    return interpolateColor(fadedColor, highlightedColor, charProgress);
+    return interpolateColor(fadedColor, highlightedColor, wordProgress);
   };
 
   return (
     <div ref={ref} className={className}>
-      {lines.map((line, lineIndex) => {
-        // Calculate the starting character index for this line
-        const charsBeforeLine = lines
+      {lines.map((lineWords, lineIndex) => {
+        // Calculate the starting word index for this line
+        const wordsBeforeLine = lines
           .slice(0, lineIndex)
-          .reduce((acc, prevLine) => acc + prevLine.length, 0);
-
-        // Clean the line of extra spaces for better centering
-        const cleanLine = line.trim();
+          .reduce((acc, prevLineWords) => acc + prevLineWords.length, 0);
 
         return (
           <div key={lineIndex} className="">
-            {cleanLine.split("").map((char, charIndex) => {
-              const totalCharIndex = charsBeforeLine + charIndex;
-              const color = getCharacterColor(totalCharIndex);
+            {lineWords.map((word, wordIndex) => {
+              const totalWordIndex = wordsBeforeLine + wordIndex;
+              const color = getWordColor(totalWordIndex);
 
               return (
-                <span
-                  key={`${lineIndex}-${charIndex}`}
-                  style={{
-                    color,
-                    transition: "color 0.3s ease-out", // Smooth color transition
-                  }}
-                  className="inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
+                <span key={`${lineIndex}-${wordIndex}`}>
+                  <span
+                    style={{
+                      color,
+                      transition: "color 0.3s ease-out", // Smooth color transition
+                    }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </span>
+                  {/* Add space after word (except last word in line) */}
+                  {wordIndex < lineWords.length - 1 && " "}
                 </span>
               );
             })}
+            {/* Add line break except for last line */}
             {lineIndex < lines.length - 1 && <br />}
           </div>
         );

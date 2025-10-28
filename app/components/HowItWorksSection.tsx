@@ -9,9 +9,15 @@ import secureIt from "@/public/HowItWork/secureIt.webp";
 import learnFreely from "@/public/HowItWork/learnfreely.webp";
 import Image from "next/image";
 
+interface HowItWorksSectionProps {
+  siteHeaders?: SanitySiteHeaders;
+}
 import teddy from "@/public/Teddy.svg";
 import Link from "next/link";
 import { IframeModal } from "./iframe-modal";
+import { SanityHowItWorksStep, SanitySiteHeaders } from "../sanity/lib/types";
+import SlowCharacterReveal from "./SlowCharacterReveal";
+import { urlFor } from "../sanity/lib/image";
 // Update your interface
 interface Step {
   number: number;
@@ -20,6 +26,10 @@ interface Step {
   imageUrl: any; // Change to any for StaticImageData
 }
 
+interface HowItWorksSectionProps {
+  siteHeaders?: SanitySiteHeaders;
+  steps: SanityHowItWorksStep[]; // ✅ Add this
+}
 const steps: Step[] = [
   {
     number: 1,
@@ -44,7 +54,16 @@ const steps: Step[] = [
   },
 ];
 
-const HowItWorksSection = () => {
+const HowItWorksSection = ({ siteHeaders, steps }: HowItWorksSectionProps) => {
+  // Transform Sanity steps to component format
+  const transformedSteps: Step[] = steps.map((step) => ({
+    number: step.number,
+    title: step.title,
+    description: step.description,
+    imageUrl: step.image
+      ? urlFor(step.image).width(800).height(600).url()
+      : lockIt,
+  }));
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const [isDesktop, setIsDesktop] = useState(false);
@@ -100,14 +119,14 @@ const HowItWorksSection = () => {
       />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
+        {/* Header */}
         <h2 className="text-4xl md:text-6xl font-medium text-center mb-12 md:mb-20">
-          How it works
+          {siteHeaders?.howItWorksHeader || "How it works"}
         </h2>
-
         {/* Steps */}
         <div className="relative flex flex-col items-center space-y-32 md:space-y-20">
           <div className="mb-[-100vh]  2xl:mb-[-80vh] pl-6 md:pl-0">
-            {steps.map((step, index) => {
+            {transformedSteps.map((step, index) => {
               const isLeft = index % 2 === 0;
 
               return (
@@ -124,6 +143,9 @@ const HowItWorksSection = () => {
                         <Image
                           src={step.imageUrl}
                           alt={step.title}
+                          unoptimized
+                          width="0"
+                          height="0"
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
                         />
                       )}
@@ -179,19 +201,27 @@ const HowItWorksSection = () => {
         </div>
 
         {/* CTA Section */}
+        {/* CTA Section */}
         <div className="text-center mt-10 font-medium md:mt-40">
-          <h3 className="text-3xl md:text-4xl  mb-4">Simple. Fast. Easy.</h3>
-          <p className="text-white/50 md:w-full w-[50%] mx-auto leading-[110%]">
-            ROOZ keeps the process simple — no phone{" "}
-            <br className="hidden md:block " /> collection, no chaos, just pure
-            focus.
-          </p>
+          <h3 className="text-3xl md:text-4xl mb-4">
+            {siteHeaders?.howItWorksSubheader || "Simple. Fast. Easy."}
+          </h3>
+
+          <SlowCharacterReveal
+            text={
+              siteHeaders?.howItWorksDescription ||
+              "ROOZ keeps the process simple — no phone collection, no chaos, just pure focus."
+            }
+            className="text-lg md:block hidden w-[23rem] mx-auto max-w-full leading-[120%]"
+            highlightedColor="#ffffff"
+            fadedColor="#333333"
+          />
           <div className="mt-6">
             <button
               onClick={() => {
                 setIsModalOpen(true);
               }}
-              className=" px-10  capitalize font-bold py-3 cursor-pointer bg-gradient-to-r from-pink-500 to-pink-600 rounded-full hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg shadow-pink-500/50"
+              className="px-10 capitalize font-bold py-3 cursor-pointer bg-gradient-to-r from-pink-500 to-pink-600 rounded-full hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg shadow-pink-500/50"
             >
               Get in touch
             </button>
