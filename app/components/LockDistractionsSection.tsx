@@ -53,7 +53,7 @@ const LockDistractionsSection = () => {
       icon: span,
       mainStat: "Banning phones with ROOZ led to higher exam performance.",
       title: "Focus",
-      subStat: "~6%",
+      subStat: "-6%",
       subText: "Higher exam scores overall",
       bgColor: "bg-[#2C9B45]",
     },
