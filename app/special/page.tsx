@@ -15,7 +15,7 @@ const RoozLanding = async () => {
     <div className="relative bg-black text-white overflow-clip w-full">
       <SpecialNav />
       <VideoScrollSection />
-      <PlaceholderSection />
+      {/* <PlaceholderSection /> */}
       <EventsTable />
       <BookDemoSection />
       <UsVThemSection />
