@@ -18,7 +18,7 @@ const VideoScrollSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 20%", "end 100%"],
+    offset: ["start 0%", "end 100%"],
   });
 
   // Transform values based on scroll

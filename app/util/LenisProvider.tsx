@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState, useRef } from "react";
 import Lenis from "@studio-freight/lenis";
 import type { LenisOptions } from "@studio-freight/lenis";
+import { usePathname } from "next/navigation";
 
 // 1. Create context
 const LenisContext = createContext<Lenis | null>(null);
@@ -18,13 +19,17 @@ export default function LenisProvider({
 }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const rafRef = useRef<number | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Check for mobile devices
     const isMobile = () => window.innerWidth <= 768;
 
-    // Only initialize on desktop
-    if (isMobile()) return;
+    // Check if current page is /specail (or /special)
+    const isSpecialPage = pathname === "/special" || pathname === "/special";
+
+    // Don't initialize on mobile OR on special page
+    if (isMobile() || isSpecialPage) return;
 
     // Initialize Lenis
     const lenisInstance = new Lenis({
@@ -33,7 +38,7 @@ export default function LenisProvider({
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      syncTouch: false, // Better performance on touch devices
+      syncTouch: false,
       touchMultiplier: 2,
     } satisfies LenisOptions);
 
@@ -68,7 +73,7 @@ export default function LenisProvider({
       }
       lenisInstance.destroy();
     };
-  }, []);
+  }, [pathname]); // Add pathname as dependency
 
   return (
     <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>
