@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import play from "@/public/specail/play.svg";
-import hero from "@/public/specail/hero.png";
+import hero from "@/public/specail/hero.webp";
 import Image from "next/image";
 import Hls from "hls.js";
 import { Volume2, VolumeX } from "lucide-react";
