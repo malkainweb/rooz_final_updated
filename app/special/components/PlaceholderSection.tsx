@@ -6,11 +6,11 @@ import Image from "next/image";
 const PlaceholderSection = () => {
   return (
     <section
-      className={`w-full bg-black text-white py-20 px-4 ${NeueMontreal.className}`}
+      className={`w-full bg-black text-white md:pb-20 px-4 ${NeueMontreal.className}`}
     >
       <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-medium text-center mb-14">
+        <h2 className="text-4xl md:text-5xl font-medium text-center mb-8 md:mb-14">
           Your options to unlock
         </h2>
 

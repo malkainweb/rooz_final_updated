@@ -1,6 +1,6 @@
 "use client";
 
-import { NeueMontreal } from "@/app/util/font";
+import { HelveticaNeue, NeueMontreal } from "@/app/util/font";
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
@@ -48,7 +48,9 @@ const UsVThemSection = () => {
     >
       <div className="md:max-w-5xl mx-auto">
         {/* Header */}
-        <h2 className={`text-4xl md:text-5xl font-medium text-center `}>
+        <h2
+          className={`text-4xl ${HelveticaNeue.className} md:text-5xl font-medium text-center `}
+        >
           Us V Them
         </h2>
 
@@ -56,10 +58,10 @@ const UsVThemSection = () => {
 
         <div
           ref={scrollContainerRef}
-          className=" w-full flex md:px-0 px-4 overflow-y-visible pb-20 md:pb-0 overflow-x-scroll"
+          className=" w-full flex md:px-0 px-4 md:overflow-x-auto overflow-y-visible pb-20  overflow-x-scroll"
         >
           <div
-            className="flex bg-[#1B1B1B] shrink-0 md:w-fit w-[40rem]  border-[#4B33C2] border rounded-[50px] 
+            className="flex bg-[#1B1B1B] shrink-0 md:w-full w-[40rem]  border-[#4B33C2] border rounded-[50px] 
  mt-40"
           >
             {/* Column 1: ALL Feature Labels */}
