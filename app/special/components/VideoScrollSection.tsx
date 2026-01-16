@@ -40,8 +40,9 @@ const VideoScrollSection = () => {
   });
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRefMobile = useRef<HTMLVideoElement | null>(null);
 
-  // ✅ setup hls
+  // ✅ setup hls for DESKTOP
   useEffect(() => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
@@ -57,37 +58,57 @@ const VideoScrollSection = () => {
     }
   }, []);
 
-  // Handle play button click
+  // ✅ setup hls for MOBILE
+  useEffect(() => {
+    if (videoRefMobile.current) {
+      if (Hls.isSupported()) {
+        const hlsMobile = new Hls({ maxBufferLength: 30 });
+        hlsMobile.loadSource("/specail/final-hls/index.m3u8");
+        hlsMobile.attachMedia(videoRefMobile.current);
+        return () => hlsMobile.destroy();
+      } else if (
+        videoRefMobile.current.canPlayType("application/vnd.apple.mpegurl")
+      ) {
+        videoRefMobile.current.src = "/specail/final-hls/index.m3u8";
+      }
+    }
+  }, []);
+
+  // Handle play button click - UPDATE THIS
   const handlePlay = () => {
     if (videoRef.current) {
       videoRef.current.play();
-      setIsPlaying(true);
     }
+    if (videoRefMobile.current) {
+      videoRefMobile.current.play();
+    }
+    setIsPlaying(true);
   };
 
-  // Handle mute toggle
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
-
-  // Add this state at the top with your other states
   const [isPaused, setIsPaused] = useState(false);
-
-  // Add this function with your other handlers
+  // Handle pause - UPDATE THIS
   const togglePlayPause = () => {
-    if (videoRef.current) {
-      if (isPaused) {
-        videoRef.current.play();
-        setIsPaused(false);
-      } else {
-        videoRef.current.pause();
-        setIsPaused(true);
-      }
+    if (isPaused) {
+      videoRef.current?.play();
+      videoRefMobile.current?.play();
+      setIsPaused(false);
+    } else {
+      videoRef.current?.pause();
+      videoRefMobile.current?.pause();
+      setIsPaused(true);
     }
   };
+
+  // Update pause on scale - UPDATE THIS
+  useMotionValueEvent(circleScale, "change", (latest) => {
+    setCurrentScale(latest);
+
+    if (latest < 500 && isPlaying) {
+      videoRef.current?.pause();
+      videoRefMobile.current?.pause();
+      setIsPlaying(false);
+    }
+  });
   return (
     <div className=" flex flex-col md:px-4 ">
       <div className="w-full min-h-[80vh]  mx-auto max-w-4xl sticky  top-[10vh] md:top-[10vh] bg-black flex items-center  ">
@@ -119,10 +140,16 @@ const VideoScrollSection = () => {
         ref={containerRef}
         className={`w-full  relative z-[10] h-[200vh] bg-linear-to-b to-black via-10% via-black  text-white pb-30 md:pb-40 ${NeueMontreal.className}`}
       >
-        <div className="w-full h-[20%] blur-3xl    bg-black absolute top-0 left-0"></div>
+        <div className="w-full h-[20%] blur-3xl  z-[2]   bg-black absolute top-0 left-0"></div>
         {/* Video Container */}
-        <div className="flex justify-center items-center sticky top-0 h-screen">
-          <div className="relative w-full h-screen">
+        <div className="flex justify-center z-[10]  items-center sticky top-0 h-screen">
+          <div className="relative w-full z-[10] h-screen">
+            <div
+              className={`  w-full absolute text-center left-1/2 -translate-x-1/2 md:translate-y-[-10%] translate-y-[-10%] top-[28%] z-[10] text-3xl  md:text-5xl ${HelveticaNeue.className}`}
+            >
+              {" "}
+              What is Rooz you <br /> ask?
+            </div>
             {/* Image with radial mask DESKTOP SECTION */}
             {/* Image with radial mask DESKTOP SECTION */}
             {/* Image with radial mask DESKTOP SECTION */}
@@ -131,7 +158,7 @@ const VideoScrollSection = () => {
             {/* Image with radial mask DESKTOP SECTION */}
             {/* Image with radial mask DESKTOP SECTION */}
             <motion.div
-              className="absolute  hidden md:block inset-0 z-10"
+              className="absolute    inset-0 z-10"
               style={{
                 maskImage:
                   "radial-gradient(circle at center, black 6%, transparent 6%)",
@@ -155,20 +182,6 @@ const VideoScrollSection = () => {
                   />
                 </button>
               )}
-
-              {/* Mute/Unmute Button - Only show when playing */}
-              {/* {isPlaying && (
-                <button
-                  onClick={toggleMute}
-                  className="absolute z-20 top-8 right-8 w-12 h-12 rounded-full bg-black backdrop-blur-sm border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all"
-                >
-                  {isMuted ? (
-                    <VolumeX className="w-6 h-6 text-white" />
-                  ) : (
-                    <Volume2 className="w-6 h-6 text-white" />
-                  )}
-                </button>
-              )} */}
 
               {isPlaying && (
                 <button
@@ -202,7 +215,7 @@ const VideoScrollSection = () => {
                 ref={videoRef}
                 loop
                 playsInline
-                className="w-full aspect-video brightness-75 "
+                className="w-full  aspect-video brightness-75 "
               />
             </motion.div>
 
@@ -267,7 +280,7 @@ const VideoScrollSection = () => {
               )}
 
               <video
-                ref={videoRef}
+                ref={videoRefMobile}
                 loop
                 playsInline
                 className="w-full h-full object-cover brightness-75 "

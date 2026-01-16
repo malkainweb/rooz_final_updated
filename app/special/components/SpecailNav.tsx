@@ -64,7 +64,7 @@ const SpecailNav = () => {
 
   const navLinks = [
     { href: "#comparison", label: "Us vs Them" },
-    { href: "#video", label: "See It In Action" },
+    { href: "#video", label: "Unlock Rooz" },
     { href: "#locked", label: "Why Lock?" },
   ];
 
@@ -88,7 +88,7 @@ const SpecailNav = () => {
       <nav
         className={`fixed w-[94%] md:w-[200rem] md:max-w-[90%] left-[50%] translate-x-[-50%] rounded-full z-[9999] bg-[#8D8D8D]/30 border-[#FFFFFF]/10 border backdrop-blur-md transition-all duration-1000 ${
           NeueMontreal.className
-        } ${isVisible ? "top-2" : "-top-24"}`}
+        } ${isVisible ? "top-4" : "-top-24"}`}
       >
         <div className="w-full mx-auto p-1.5 flex items-center justify-between">
           <a href="#" className="pl-3 md:pl-5">

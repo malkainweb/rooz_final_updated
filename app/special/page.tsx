@@ -1,5 +1,6 @@
 import Footer from "../components/footer";
 import { getSiteHeaders } from "../sanity/lib/queries";
+import BookDemoSection from "./components/BookDemoSection";
 import PlaceholderSection from "./components/PlaceholderSection";
 import SpecialNav from "./components/SpecailNav";
 import UsVThemSection from "./components/UsVThemSection";
@@ -14,6 +15,7 @@ const RoozLanding = async () => {
       <SpecialNav />
       <VideoScrollSection />
       <PlaceholderSection />
+      <BookDemoSection />
       <UsVThemSection />
 
       <Footer siteHeaders={siteHeaders} />
