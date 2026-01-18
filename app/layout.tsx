@@ -119,6 +119,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cal.com" />
         <link rel="dns-prefetch" href="https://cal.com" />
       </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

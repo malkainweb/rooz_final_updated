@@ -16,8 +16,8 @@ const RoozLanding = async () => {
       <SpecialNav />
       <VideoScrollSection />
       {/* <PlaceholderSection /> */}
-      <EventsTable />
-      <BookDemoSection />
+      {/* <EventsTable /> */}
+      {/* <BookDemoSection /> */}
       <UsVThemSection />
 
       <Footer siteHeaders={siteHeaders} />

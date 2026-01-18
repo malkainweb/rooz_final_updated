@@ -147,8 +147,7 @@ const VideoScrollSection = () => {
             <div
               className={`  w-full absolute text-center left-1/2 -translate-x-1/2 md:translate-y-[-10%] translate-y-[-10%] top-[28%] z-[10] text-3xl  md:text-5xl ${HelveticaNeue.className}`}
             >
-              {" "}
-              What is Rooz you <br /> ask?
+              Watch a quick tutorial <br /> on how to use rooz
             </div>
             {/* Image with radial mask DESKTOP SECTION */}
             {/* Image with radial mask DESKTOP SECTION */}

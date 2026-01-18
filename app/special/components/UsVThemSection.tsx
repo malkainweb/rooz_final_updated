@@ -12,13 +12,36 @@ import kangaroo from "@/public/specail/kangaroo.png";
 
 interface ComparisonRow {
   feature: string;
+  rooz: string;
+  otherBrands: string;
 }
 
 const comparisonFeatures: ComparisonRow[] = [
-  { feature: "Safe and secure" },
-  { feature: "Fits perfectly" },
-  { feature: "Safe and secure" },
-  { feature: "Fits perfectly" },
+  {
+    feature: "Daily staff enforcement",
+    rooz: "Designed to minimize daily enforcement and confrontations",
+    otherBrands: "Requires consistent reminders and enforcement",
+  },
+  {
+    feature: "Students and parents framing",
+    rooz: "Boundary-based, expectation-driven approach",
+    otherBrands: "Restriction-based, rule-driven approach",
+  },
+  {
+    feature: "Policy flexibility",
+    rooz: "Unlock rules adapt by grade/situation",
+    otherBrands: "One-size-fits-all policies",
+  },
+  {
+    feature: "Implementation & transition support",
+    rooz: "Designed for districts transitioning or refining programs",
+    otherBrands: "Built primarily for first-time adoption",
+  },
+  {
+    feature: "Educational context",
+    rooz: "Built to be explained and normalized with students",
+    otherBrands: "Focused on compliance and enforcement",
+  },
 ];
 
 const UsVThemSection = () => {
@@ -47,13 +70,6 @@ const UsVThemSection = () => {
       className={`w-full  bg-black text-white py-20 md:px-4 ${NeueMontreal.className}`}
     >
       <div className="md:max-w-5xl mx-auto">
-        {/* Header */}
-        <h2
-          className={`text-4xl ${HelveticaNeue.className} md:text-5xl font-medium text-center `}
-        >
-          Us V Them
-        </h2>
-
         {/* Comparison Table */}
 
         <div
@@ -61,16 +77,16 @@ const UsVThemSection = () => {
           className=" w-full flex md:px-0 px-4 md:overflow-x-auto overflow-y-visible pb-20  overflow-x-scroll"
         >
           <div
-            className="flex bg-[#1B1B1B] shrink-0 md:w-full w-[40rem]  border-[#4B33C2] border rounded-[50px] 
+            className="grid grid-cols-3 bg-[#1B1B1B] shrink-0 md:w-full w-[55rem]  border-[#4B33C2] border rounded-[50px] 
  mt-40"
           >
             {/* Column 1: ALL Feature Labels */}
-            <div className="flex w-[40%]  lg:w-[46%] flex-col ">
+            <div className="flex flex-col ">
               <div className="h-28"></div>
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="text-left pl-[15%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal text-2xl  px-4 "
+                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal text-base   "
                 >
                   {item.feature}
                 </div>
@@ -78,7 +94,7 @@ const UsVThemSection = () => {
             </div>
 
             {/* Column 2: ALL ROOZ Checks */}
-            <div className="flex flex-col relative w-[30%] lg:w-[27%] ">
+            <div className="flex flex-col relative  ">
               <div className="bg-gradient-to-r from-[#6E78FB] to-[#4A31C1] absolute w-full h-[120%] top-[50%] rounded-[30px]  justify-center flex translate-y-[-50%] left-0">
                 <div className="  w-fit h-fit mx-auto flex justify-center ">
                   {" "}
@@ -97,15 +113,15 @@ const UsVThemSection = () => {
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="flex z-[10] items-center border-t border-t-white h-24 justify-center "
+                  className="text-left px-[10%] z-[10]  flex items-center h-24 border-t border-t-[white] text-white font-normal text-base   "
                 >
-                  <Image src={checkkk} alt="check" className="w-10" />
+                  {item.rooz}
                 </div>
               ))}
             </div>
 
             {/* Column 3: ALL Other Brands X */}
-            <div className="flex flex-col w-[30%] lg:w-[27%] ">
+            <div className="flex flex-col  ">
               <div className="h-28 flex items-center justify-center">
                 <p className=" text-white font-medium text-2xl  translate-y-3 ">
                   Other brands
@@ -114,9 +130,9 @@ const UsVThemSection = () => {
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="flex h-24 border-t border-t-[#4B33C2] items-center justify-center "
+                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal text-base   "
                 >
-                  <Image src={erroerr} alt="error" className="w-10" />
+                  {item.otherBrands}
                 </div>
               ))}
             </div>
