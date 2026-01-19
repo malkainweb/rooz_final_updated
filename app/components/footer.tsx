@@ -88,7 +88,7 @@ const Footer = ({ siteHeaders }: FooterProps) => {
           Designed and developed by Malkain
         </a>
         <iframe
-          src="https://cal.com/sarah-spirer-myrooz"
+          src="http://cal.com/myrooz"
           style={{
             position: "absolute",
             width: "1px",

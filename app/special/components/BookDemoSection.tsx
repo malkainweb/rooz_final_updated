@@ -33,8 +33,8 @@ const BookDemoSection = () => {
 
           {/* Cal.com Iframe */}
           <iframe
-            src="https://cal.com/sarah-spirer-myrooz/30min"
-            style={{
+            src=""
+            http:style={{ //cal.com/myrooz/30min"
               height: "100%",
               width: "100%",
               border: 0,
