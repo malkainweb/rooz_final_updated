@@ -115,7 +115,7 @@ export function IframeModal({ onClose }: any) {
 
           <div className="w-full h-[650px] max-h-[85vh]">
             <iframe
-              src="http://cal.com/myrooz"
+              src="https://cal.com/myrooz"
               style={{
                 height: "100%",
                 width: "100%",

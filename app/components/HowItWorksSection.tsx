@@ -106,7 +106,7 @@ const HowItWorksSection = ({ siteHeaders, steps }: HowItWorksSectionProps) => {
       className={`relative bg-black  text-white pb-32 pt-20 px-6 ${NeueMontreal.className}`}
     >
       <iframe
-        src="http://cal.com/myrooz"
+        src="https://cal.com/myrooz"
         style={{
           position: "absolute",
           width: "1px",

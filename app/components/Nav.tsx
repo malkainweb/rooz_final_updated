@@ -67,7 +67,7 @@ const Nav = () => {
     <>
       {/* Hidden preload iframe */}
       <iframe
-        src="http://cal.com/myrooz"
+        src="https://cal.com/myrooz"
         style={{
           //cal.com/myrooz"
           position: "absolute",
