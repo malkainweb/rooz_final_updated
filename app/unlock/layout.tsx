@@ -31,16 +31,16 @@ export const metadata: Metadata = {
     telephone: false,
   },
 
-  metadataBase: new URL("https://myrooz.com"),
+  metadataBase: new URL("https://myrooz.com/unlock"),
 
   alternates: {
-    canonical: "/specail",
+    canonical: "/unlock",
   },
 
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://myrooz.com/special",
+    url: "https://myrooz.com/unlock",
     siteName: "ROOZ",
     title: "Claim Your Free ROOZ Phone Pouch Sample | Exclusive Educator Offer",
     description:
