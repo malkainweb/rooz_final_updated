@@ -77,7 +77,7 @@ const UsVThemSection = () => {
           className=" w-full flex md:px-0 px-4 md:overflow-x-auto overflow-y-visible pb-20  overflow-x-scroll"
         >
           <div
-            className="grid grid-cols-3 bg-[#1B1B1B] shrink-0 md:w-full w-[55rem]  border-[#4B33C2] border rounded-[50px] 
+            className="grid grid-cols-3 bg-[#1B1B1B] shrink-0 md:w-full w-[35rem]  border-[#4B33C2] border rounded-[50px] 
  mt-40"
           >
             {/* Column 1: ALL Feature Labels */}
@@ -86,7 +86,7 @@ const UsVThemSection = () => {
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal text-base   "
+                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal md:text-base  text-sm  "
                 >
                   {item.feature}
                 </div>
@@ -106,14 +106,14 @@ const UsVThemSection = () => {
                 </div>
               </div>
               <div className="h-28 flex items-center justify-center">
-                <p className=" text-white font-black text-4xl  translate-y-3 ">
+                <p className=" text-white font-black md:text-4xl text-2xl  translate-y-3 ">
                   ROOZ
                 </p>
               </div>
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="text-left px-[10%] z-[10]  flex items-center h-24 border-t border-t-[white] text-white font-normal text-base   "
+                  className="text-left px-[10%] z-[10]  flex items-center h-24 border-t border-t-[white] text-white font-normal md:text-base  text-sm  "
                 >
                   {item.rooz}
                 </div>
@@ -123,14 +123,14 @@ const UsVThemSection = () => {
             {/* Column 3: ALL Other Brands X */}
             <div className="flex flex-col  ">
               <div className="h-28 flex items-center justify-center">
-                <p className=" text-white font-medium text-2xl  translate-y-3 ">
+                <p className=" text-white font-medium md:text-2xl text-lg translate-y-3 ">
                   Other brands
                 </p>
               </div>
               {comparisonFeatures.map((item, index) => (
                 <div
                   key={index}
-                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal text-base   "
+                  className="text-left px-[10%]  flex items-center h-24 border-t border-t-[#4B33C2] text-white font-normal md:text-base  text-sm  "
                 >
                   {item.otherBrands}
                 </div>
@@ -139,7 +139,7 @@ const UsVThemSection = () => {
           </div>
         </div>
 
-        <div className="flex md:hidden w-full gap-6 justify-center ">
+        <div className="flex md:hidden w-full gap-6 justify-center mt-4 ">
           <button
             onClick={scrollLeft}
             className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all"

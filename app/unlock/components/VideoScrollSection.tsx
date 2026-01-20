@@ -111,7 +111,7 @@ const VideoScrollSection = () => {
   });
   return (
     <div className=" flex flex-col md:px-4 ">
-      <div className="w-full min-h-[80vh]  mx-auto max-w-4xl sticky  top-[10vh] md:top-[10vh] bg-black flex items-center  ">
+      <div className="w-full min-h-[80vh]  mx-auto max-w-4xl sticky  top-[13vh] md:top-[10vh] bg-black flex items-center  ">
         <div className="flex flex-col-reverse w-full md:flex-row   items-center gap-6 md:gap-16 max-w-6xl">
           {/* Phone Pouch Image */}
           <div className="relative w-full ">
