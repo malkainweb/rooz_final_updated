@@ -52,6 +52,12 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
   const handleContinue = () => {
     const enteredCode = code.join("");
     if (enteredCode.length === 7) {
+      // Validate the code
+      if (enteredCode !== "ROOZ819") {
+        setErrorMessage("Invalid code. Please check and try again.");
+        setStep("error");
+        return;
+      }
       setFormData({ ...formData, code: enteredCode });
       setStep("details");
     }
@@ -98,7 +104,12 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
   };
 
   const handleRetry = () => {
-    setStep("details");
+    if (step === "error" && errorMessage.includes("Invalid code")) {
+      setStep("code");
+      setCode(["", "", "", "", "", "", ""]);
+    } else {
+      setStep("details");
+    }
     setErrorMessage("");
   };
 
@@ -333,7 +344,7 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
                     </p>
                     <button
                       onClick={handleRetry}
-                      className="bg-gradient-to-r from-pink-500 to-[#FF004C] px-12 py-3 rounded-full text-white text-base font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
+                      className="bg-gradient-to-r cursor-pointer from-pink-500 to-[#FF004C] px-12 py-3 rounded-full text-white text-base font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
                     >
                       Try Again
                     </button>

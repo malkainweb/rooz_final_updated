@@ -151,11 +151,11 @@ const Footer = ({ siteHeaders }: FooterProps) => {
               </p>
 
               <a
-                href="tel:+13322033316"
+                href="tel:+19548001118"
                 className="text-white underline underline-offset-4 "
               >
                 <i className=" bi bi-telephone mr-2"></i>
-                +1 332-203-3316
+                +1 (954) 800-1118
               </a>
 
               {/* Social Media Icons */}

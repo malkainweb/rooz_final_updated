@@ -222,20 +222,34 @@ const Footer = ({ siteHeaders }: FooterProps) => {
               Secure focus. Stronger learning
             </h2>
 
-            <div className="flex  mt-10 md:mt-16 gap-3 flex-col">
+            <div className="flex  text-base mt-10 md:mt-16 gap-2 flex-col">
               {/* Email Link */}
               <a
                 href="mailto:hello@myrooz.com"
-                className="text-white text-lg hover:text-pink-500 transition-colors underline"
+                className="text-white  hover:text-pink-500 transition-colors underline"
               >
+                <i className=" bi bi-envelope-fill mr-2"></i>
                 hello@myrooz.com
               </a>
 
               {/* Copyright */}
-              <p className="text-white text-lg">@Rooz 2025</p>
+              <p className="text-white">
+                <i className="bi bi-geo-alt mr-2"></i>
+                200 South Andrews Ave, Suite 504
+                <br />
+                Fort Lauderdale, FL 33301
+              </p>
+
+              <a
+                href="tel:+19548001118"
+                className="text-white underline underline-offset-4 "
+              >
+                <i className=" bi bi-telephone mr-2"></i>
+                +1 (954) 800-1118
+              </a>
 
               {/* Social Media Icons */}
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex mt-3 items-center justify-center gap-4">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}

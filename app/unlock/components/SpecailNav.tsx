@@ -65,9 +65,9 @@ const SpecailNav = () => {
         } top-4`}
       >
         <div className="w-full mx-auto p-1.5 flex items-center justify-between">
-          <a href="#" className="pl-3 md:pl-5">
+          <Link href="/" className="pl-3 md:pl-5">
             <Image src={logo} alt="logo" className="w-[6rem] h-auto" />
-          </a>
+          </Link>
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-gradient-to-r cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
