@@ -16,8 +16,8 @@ export async function POST(req: Request) {
     const message = {
       from: process.env.PUBLIC_EMAIL_ID,
       replyTo: data.email,
-      //   to: ["hello@myrooz.com", "support@myrooz.com"], // Update with your ROOZ emails
-      to: ["davisisibor@gmail.com"], // Update with your ROOZ emails
+      to: ["hello@myrooz.com"], // Update with your ROOZ emails
+      //   to: ["davisisibor@gmail.com"], // Update with your ROOZ emails
       subject: `New ROOZ Gift Claim - ${data.firstName} from ${data.school}`,
       text: `New gift claim submission from ${data.firstName}`,
       html: `
