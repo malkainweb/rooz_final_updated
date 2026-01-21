@@ -172,7 +172,7 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
                           key={index}
                           ref={(el: any) => (inputRefs.current[index] = el)}
                           type="text"
-                          inputMode="numeric"
+                          inputMode="text"
                           maxLength={1}
                           value={digit}
                           onChange={(e) => handleChange(index, e.target.value)}
