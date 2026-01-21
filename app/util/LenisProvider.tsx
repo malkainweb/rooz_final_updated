@@ -26,10 +26,10 @@ export default function LenisProvider({
     const isMobile = () => window.innerWidth <= 768;
 
     // Check if current page is /specail (or /special)
-    const isSpecialPage = pathname === "/special" || pathname === "/special";
+    const isSpecialPage = pathname === "/unlock" || pathname === "/unlock";
 
     // Don't initialize on mobile OR on special page
-    if (isMobile()) return;
+    if (isMobile() || isSpecialPage) return;
 
     // Initialize Lenis
     const lenisInstance = new Lenis({

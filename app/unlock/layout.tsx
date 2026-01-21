@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "How to Unlock Your Rooz Pouch",
+  description: "",
 
   authors: [{ name: "ROOZ" }],
 
