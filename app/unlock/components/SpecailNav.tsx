@@ -70,9 +70,9 @@ const SpecailNav = () => {
           </Link>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-gradient-to-r cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
+            className="bg-gradient-to-r cursor-pointer from-pink-500 to-[#FF004C] px-6 py-3 rounded-full md:text-base text-sm font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
           >
-            Claim Gift
+            Claim Your Thank You
           </button>
         </div>
       </nav>

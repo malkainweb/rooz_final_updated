@@ -103,7 +103,7 @@ const Footer = ({ siteHeaders }: FooterProps) => {
           {/* CTA Button */}
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-gradient-to-r from-pink-500 to-[#FF004C] px-10 py-4 rounded-full text-white text-base md:text-lg font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
+            className="bg-gradient-to-r from-pink-500 cursor-pointer to-[#FF004C] px-10 py-4 rounded-full text-white text-base md:text-lg font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
           >
             GET IN TOUCH
           </button>

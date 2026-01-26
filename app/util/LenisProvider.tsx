@@ -29,7 +29,7 @@ export default function LenisProvider({
     const isSpecialPage = pathname === "/unlock" || pathname === "/unlock";
 
     // Don't initialize on mobile OR on special page
-    if (isMobile() || isSpecialPage) return;
+    if (isMobile()) return;
 
     // Initialize Lenis
     const lenisInstance = new Lenis({
