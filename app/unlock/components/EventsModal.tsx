@@ -19,24 +19,29 @@ interface EventsModalProps {
 
 const events: EventRow[] = [
   {
-    event: "Rooz school tour",
-    venue: "Happy Valley",
-    date: "February 1, 2026  1:00 pm",
+    event: "AASA",
+    venue: "Nashville",
+    date: "2/12 - 2/14",
   },
   {
-    event: "Student conference",
-    venue: "Happy Valley",
-    date: "February 1, 2026  1:00 pm",
+    event: "NYSCOSS Winter institute",
+    venue: "Albany",
+    date: "3/1 - 3/03",
   },
   {
-    event: "Student orientation",
-    venue: "Raceway",
-    date: "February 1, 2026  1:00 pm",
+    event: "NSBA",
+    venue: "San Antonio",
+    date: "4/10 - 4/12",
   },
   {
-    event: "Spelling bee",
-    venue: "Delta Center",
-    date: "February 1, 2026  1:00 pm",
+    event: "Safe Schools",
+    venue: "SOCAL",
+    date: "6/22 - 6/24",
+  },
+  {
+    event: "ISTe",
+    venue: "Orlando",
+    date: "6/28 - 7/01",
   },
 ];
 
@@ -149,7 +154,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                    className={`grid grid-cols-3 text-xs md:text-base text-center transition-colors hover:bg-white/5 ${
+                    className={`grid grid-cols-3 text-xs md:text-base text-center transition-colors ${
                       index !== events.length - 1
                         ? "border-b border-[#4B33C2]/30"
                         : ""
