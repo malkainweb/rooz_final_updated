@@ -50,13 +50,13 @@ const VideoScrollSection = () => {
     if (videoRef.current) {
       if (Hls.isSupported()) {
         const hls = new Hls({ maxBufferLength: 30 });
-        hls.loadSource("/specail/final-hls/index.m3u8");
+        hls.loadSource("/des/index.m3u8");
         hls.attachMedia(videoRef.current);
         return () => hls.destroy();
       } else if (
         videoRef.current.canPlayType("application/vnd.apple.mpegurl")
       ) {
-        videoRef.current.src = "/specail/final-hls/index.m3u8";
+        videoRef.current.src = "/des/index.m3u8";
       }
     }
   }, []);
@@ -66,13 +66,13 @@ const VideoScrollSection = () => {
     if (videoRefMobile.current) {
       if (Hls.isSupported()) {
         const hlsMobile = new Hls({ maxBufferLength: 30 });
-        hlsMobile.loadSource("/specail/final-hls/index.m3u8");
+        hlsMobile.loadSource("/mob/index.m3u8");
         hlsMobile.attachMedia(videoRefMobile.current);
         return () => hlsMobile.destroy();
       } else if (
         videoRefMobile.current.canPlayType("application/vnd.apple.mpegurl")
       ) {
-        videoRefMobile.current.src = "/specail/final-hls/index.m3u8";
+        videoRefMobile.current.src = "/mob/index.m3u8";
       }
     }
   }, []);

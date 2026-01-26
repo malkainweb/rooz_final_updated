@@ -46,7 +46,7 @@ const ActionCards = () => {
 
   return (
     <>
-      <div className="w-full max-w-4xl z-[10] mx-auto md:pt-32 pt-26 grid grid-cols-1 gap-4 md:gap-10 px-4">
+      <div className="w-full max-w-4xl z-[10] mx-auto md:pt-32 pt-26 grid grid-cols-1 gap-4 md:gap-10 px-6">
         {cards.map((card, index) => (
           <motion.div
             key={index}
