@@ -4,6 +4,7 @@ import { HelveticaNeue, NeueMontreal } from "@/app/util/font";
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
+  useInView,
   useMotionValueEvent,
   useScroll,
   useTransform,
@@ -45,6 +46,14 @@ const VideoScrollSection = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const videoRefMobile = useRef<HTMLVideoElement | null>(null);
 
+  // Add this new useEffect hook right after your existing useEffects (around line 80)
+
+  // ✅ Pause video when container is out of view
+  const isInView = useInView(containerRef, {
+    amount: 0.1, // Trigger when 10% of element is visible
+    margin: "0px",
+  });
+
   // ✅ setup hls for DESKTOP
   useEffect(() => {
     if (videoRef.current) {
@@ -77,41 +86,78 @@ const VideoScrollSection = () => {
     }
   }, []);
 
-  // Handle play button click - UPDATE THIS
+  // Add this state at the top with your other states
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Add this useEffect to detect screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Handle play button click - UPDATED
   const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-    if (videoRefMobile.current) {
+    if (isMobile && videoRefMobile.current) {
       videoRefMobile.current.play();
+    } else if (!isMobile && videoRef.current) {
+      videoRef.current.play();
     }
     setIsPlaying(true);
   };
 
   const [isPaused, setIsPaused] = useState(false);
-  // Handle pause - UPDATE THIS
+
+  // Handle pause - UPDATED
   const togglePlayPause = () => {
     if (isPaused) {
-      videoRef.current?.play();
-      videoRefMobile.current?.play();
+      if (isMobile) {
+        videoRefMobile.current?.play();
+      } else {
+        videoRef.current?.play();
+      }
       setIsPaused(false);
     } else {
-      videoRef.current?.pause();
-      videoRefMobile.current?.pause();
+      if (isMobile) {
+        videoRefMobile.current?.pause();
+      } else {
+        videoRef.current?.pause();
+      }
       setIsPaused(true);
     }
   };
 
-  // Update pause on scale - UPDATE THIS
+  // Update pause on scale - UPDATED
   useMotionValueEvent(circleScale, "change", (latest) => {
     setCurrentScale(latest);
 
     if (latest < 500 && isPlaying) {
-      videoRef.current?.pause();
-      videoRefMobile.current?.pause();
+      if (isMobile) {
+        videoRefMobile.current?.pause();
+      } else {
+        videoRef.current?.pause();
+      }
       setIsPlaying(false);
     }
   });
+
+  // Also update the useInView effect - UPDATED
+  useEffect(() => {
+    if (!isInView && isPlaying) {
+      if (isMobile) {
+        videoRefMobile.current?.pause();
+      } else {
+        videoRef.current?.pause();
+      }
+      setIsPlaying(false);
+      setIsPaused(false);
+    }
+  }, [isInView, isPlaying, isMobile]);
   const [showIframeModal, setShowIframeModal] = useState(false);
   return (
     <>
@@ -143,6 +189,42 @@ const VideoScrollSection = () => {
               </h2>
             </div>
           </div>
+        </div>
+        <div className="hidden md:flex justify-center relative z-20 -mt-10">
+          <motion.div
+            animate={{
+              y: [0, 10, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="flex flex-col items-center gap-2 cursor-pointer"
+            onClick={() => {
+              window.scrollTo({
+                top: window.innerHeight,
+                behavior: "smooth",
+              });
+            }}
+          >
+            <span className="text-white/60 text-sm uppercase font-medium tracking-wider">
+              Scroll
+            </span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="opacity-60"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </motion.div>
         </div>
         <section
           className="bg-linear-to-b flex flex-col pt-20
