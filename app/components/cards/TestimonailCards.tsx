@@ -15,11 +15,11 @@ const TestimonialCard = ({ testimonial, isCenter }: TestimonialCardProps) => {
         {testimonial.text}
       </p>
       <div className="flex border-t border-t-[#D9D9D9]/50 pt-8 items-center  gap-3">
-        <img
+        {/* <img
           src={testimonial.avatar}
           alt={testimonial.author}
           className="w-12 h-12 rounded-full object-cover"
-        />
+        /> */}
         <div>
           <p className="text-white font-semibold">- {testimonial.author}</p>
           <p className="text-gray-400 text-sm">{testimonial.role}</p>
