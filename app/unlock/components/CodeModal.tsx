@@ -165,7 +165,7 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
                 duration: 0.5,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="relative w-full max-w-2xl overflow-hidden"
+              className="relative  rounded-[40px] overflow-hidden w-full max-w-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Gradient background with glow effect */}
@@ -182,7 +182,7 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
               </button>
 
               {/* Content */}
-              <div className="relative z-10 p-8 md:p-12">
+              <div className="relative z-10 p-8  overflow-y-scroll h-full max-h-[85vh] custom-scrollbar   md:p-12">
                 <AnimatePresence mode="wait">
                   {/* Step 1: Code Entry */}
                   {step === "code" && (
@@ -237,7 +237,7 @@ const CodeModal = ({ isOpen, onClose }: CodeModalProps) => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.4 }}
-                      className="flex flex-col items-center w-full max-h-[70vh]  custom-scrollbar pr-2"
+                      className="flex flex-col items-center w-full   pr-2"
                     >
                       <h3 className="text-white text-2xl md:text-3xl font-medium mb-2">
                         Claim your gift
