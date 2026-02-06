@@ -30,6 +30,7 @@ const VideoScrollSection = () => {
   const [currentScale, setCurrentScale] = useState(100);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [canPlay, setCanPlay] = useState(false);
 
   useMotionValueEvent(circleScale, "change", (latest) => {
     setCurrentScale(latest);
@@ -102,7 +103,10 @@ const VideoScrollSection = () => {
   }, []);
 
   // Handle play button click - UPDATED
+  // Handle play button click - UPDATED
   const handlePlay = () => {
+    if (!canPlay) return; // Don't play if not allowed
+
     if (isMobile && videoRefMobile.current) {
       videoRefMobile.current.play();
     } else if (!isMobile && videoRef.current) {
@@ -133,8 +137,16 @@ const VideoScrollSection = () => {
   };
 
   // Update pause on scale - UPDATED
+  // Update pause on scale - UPDATED
   useMotionValueEvent(circleScale, "change", (latest) => {
     setCurrentScale(latest);
+
+    // Enable play button when scale is large enough
+    if (latest >= 500) {
+      setCanPlay(true);
+    } else {
+      setCanPlay(false);
+    }
 
     if (latest < 500 && isPlaying) {
       if (isMobile) {
@@ -145,7 +157,6 @@ const VideoScrollSection = () => {
       setIsPlaying(false);
     }
   });
-
   // Also update the useInView effect - UPDATED
   useEffect(() => {
     if (!isInView && isPlaying) {
@@ -295,7 +306,11 @@ const VideoScrollSection = () => {
                 >
                   {/* Play Button - Only show when not playing */}
                   {!isPlaying && (
-                    <button onClick={handlePlay} className="cursor-pointer">
+                    <button
+                      disabled={!canPlay}
+                      onClick={handlePlay}
+                      className="cursor-pointer"
+                    >
                       <Image
                         src={play}
                         alt="Play Icon"
@@ -363,7 +378,11 @@ const VideoScrollSection = () => {
                 >
                   {/* Play Button - Only show when not playing */}
                   {!isPlaying && (
-                    <button onClick={handlePlay} className="cursor-pointer">
+                    <button
+                      disabled={!canPlay}
+                      onClick={handlePlay}
+                      className="cursor-pointer"
+                    >
                       <Image
                         src={play}
                         alt="Play Icon"
