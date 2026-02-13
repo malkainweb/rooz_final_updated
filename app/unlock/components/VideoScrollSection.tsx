@@ -193,9 +193,9 @@ const VideoScrollSection = ({
       )}
       <div className=" flex flex-col md:px-4 ">
         <div className="w-full min-h-[80vh]  mx-auto max-w-4xl sticky  top-[13vh] md:top-[10vh] bg-black flex items-center  ">
-          <div className="flex flex-col-reverse border2 w-full md:flex-row   items-center gap-6 md:gap-16 max-w-6xl">
+          <div className="flex flex-col-reverse  w-full md:flex-row   items-center gap-6 md:gap-16 max-w-6xl">
             {/* Phone Pouch Image */}
-            <div className="relative border2 w-full ">
+            <div className="relative  w-full ">
               <Image
                 src={hero}
                 alt="ROOZ Phone Pouch"
@@ -204,12 +204,12 @@ const VideoScrollSection = ({
             </div>
 
             {/* Text Card */}
-            <div className="bg-[#1C1C1C] border2 text-center rounded-[45px] md:px-16 px-10 py-10">
+            <div className="bg-[#1C1C1C]  text-center rounded-[45px] md:px-16 px-10 py-10">
               <p className="text-sm font-bold uppercase tracking-widest text-white/50 mb-3">
                 {videoScrollContent?.heroLabel || "ROOZ"}
               </p>
               <h2
-                className={`${HelveticaNeue.className} text-4xl md:text-5xl text-center font-normal max-w-2xl text-white  leading-[100%]`}
+                className={`${HelveticaNeue.className} text-4xl md:text-5xl text-center font-normal max-w-xl text-white  leading-[100%]`}
               >
                 {videoScrollContent?.heroHeading.split("\\n").map((line, i) => (
                   <span key={i}>
