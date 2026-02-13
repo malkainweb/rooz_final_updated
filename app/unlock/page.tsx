@@ -15,6 +15,7 @@ import SpecialNav from "./components/SpecailNav";
 import UsVThemSection from "./components/UsVThemSection";
 import VideoScrollSection from "./components/VideoScrollSection";
 
+export const revalidate = 60;
 const RoozLanding = async () => {
   // Fetch all data server-side
   const [
