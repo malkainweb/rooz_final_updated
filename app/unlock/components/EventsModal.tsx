@@ -5,47 +5,15 @@ import { X } from "lucide-react";
 import { HelveticaNeue } from "@/app/util/font";
 import { useLenis } from "@/app/util/LenisProvider";
 import { useEffect } from "react";
-
-interface EventRow {
-  event: string;
-  venue: string;
-  date: string;
-}
+import { SanityEvent } from "@/app/sanity/lib/types";
 
 interface EventsModalProps {
   isOpen: boolean;
   onClose: () => void;
+  events: SanityEvent[]; // ✅ Add this prop
 }
 
-const events: EventRow[] = [
-  {
-    event: "AASA",
-    venue: "Nashville",
-    date: "2/12 - 2/14",
-  },
-  {
-    event: "NYSCOSS Winter institute",
-    venue: "Albany",
-    date: "3/1 - 3/03",
-  },
-  {
-    event: "NSBA",
-    venue: "San Antonio",
-    date: "4/10 - 4/12",
-  },
-  {
-    event: "Safe Schools",
-    venue: "SOCAL",
-    date: "6/22 - 6/24",
-  },
-  {
-    event: "ISTe",
-    venue: "Orlando",
-    date: "6/28 - 7/01",
-  },
-];
-
-const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
+const EventsModal = ({ isOpen, onClose, events }: EventsModalProps) => {
   const lenis = useLenis();
 
   // Stop/start Lenis when modal opens/closes
@@ -76,6 +44,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
       document.body.style.overflow = "";
     };
   }, [isOpen, lenis]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -85,7 +54,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[9999] flex items-center  justify-center bg-black/60 backdrop-blur-xl p-4"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-xl p-4"
           onClick={onClose}
         >
           <motion.div
@@ -96,7 +65,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
               duration: 0.5,
               ease: [0.16, 1, 0.3, 1], // Luxury easing
             }}
-            className="relative w-full  custom-scrollbar  rounded-[40px] overflow-y-hidden max-w-6xl max-h-[90vh] overflow-hidden"
+            className="relative w-full custom-scrollbar rounded-[40px] overflow-y-hidden max-w-6xl max-h-[90vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Gradient background with glow effect */}
@@ -150,7 +119,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
                 {/* Table Rows */}
                 {events.map((event, index) => (
                   <motion.div
-                    key={index}
+                    key={event._id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
@@ -161,7 +130,7 @@ const EventsModal = ({ isOpen, onClose }: EventsModalProps) => {
                     }`}
                   >
                     <div className="px-4 md:px-12 py-6 md:py-8 flex items-center justify-center font-light text-[#FFEDFF]/90">
-                      {event.event}
+                      {event.eventName}
                     </div>
                     <div className="px-4 md:px-12 py-6 md:py-8 flex items-center justify-center font-light text-[#FFEDFF]/90 border-l border-[#4B33C2]/30">
                       {event.venue}

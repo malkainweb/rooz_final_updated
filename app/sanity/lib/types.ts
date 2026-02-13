@@ -79,3 +79,67 @@ export interface SanityWhyChooseUsCard {
   };
   order: number;
 }
+
+// app/sanity/lib/types.ts (add this to your existing types)
+
+export interface SanityComparisonRow {
+  _id: string;
+  order: number;
+  feature: string;
+  rooz: string;
+  otherBrands: string;
+}
+
+// app/sanity/lib/types.ts (add to existing file)
+
+export interface SanityEvent {
+  _id: string;
+  order: number;
+  eventName: string;
+  venue: string;
+  date: string;
+}
+
+// app/sanity/lib/types.ts
+export interface SanityActionCard {
+  _id: string;
+  order: number;
+  imageUrl: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  actionType: "request" | "events";
+}
+
+// app/sanity/lib/types.ts
+export interface SanityBookDemoSection {
+  _id: string;
+  heading: string;
+  description: string;
+  buttonText: string;
+}
+
+// app/sanity/lib/types.ts
+export interface SanityFooterContent {
+  _id: string;
+  ctaHeading: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+  tagline: string;
+  email: string;
+  addressLine1: string;
+  addressLine2: string;
+  phone: string;
+  phoneLink: string;
+  instagramUrl: string;
+  linkedinUrl: string;
+}
+
+// app/sanity/lib/types.ts
+export interface SanityVideoScrollContent {
+  _id: string;
+  heroLabel: string;
+  heroHeading: string;
+  videoHeading: string;
+}

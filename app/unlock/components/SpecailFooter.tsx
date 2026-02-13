@@ -4,49 +4,20 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import bg from "@/public/testimonials/bg.svg";
 import logo from "@/public/logo.svg";
 import teddy from "@/public/Teddy.svg";
-
 import { Instagram, Linkedin } from "lucide-react";
-
 import Image from "next/image";
 import { NeueMontreal } from "../../util/font";
 import Link from "next/link";
-import { SanitySiteHeaders } from "@/app/sanity/lib/types";
+import { SanityFooterContent } from "@/app/sanity/lib/types";
 import { IframeModal } from "@/app/components/iframe-modal";
 
 interface FooterProps {
-  siteHeaders?: SanitySiteHeaders;
+  footerContent?: SanityFooterContent;
 }
 
-// Social media links data
-const socialLinks = [
-  {
-    name: "Instagram",
-    url: "https://instagram.com/myroozpouch",
-    icon: Instagram,
-    ariaLabel: "Follow us on Instagram",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/company/myrooz/",
-    icon: Linkedin,
-    ariaLabel: "Follow us on LinkedIn",
-  },
-];
-const Footer = ({ siteHeaders }: FooterProps) => {
-  //   const containerRef = useRef<HTMLDivElement>(null);
-  //   const footerContainer = useRef<HTMLDivElement>(null);
-
-  //   const { scrollYProgress } = useScroll({
-  //     target: containerRef,
-  //     offset: ["start start", "1.5 end"],
-  //   });
-
-  //   const { scrollYProgress: mobileProgress } = useScroll({
-  //     target: footerContainer,
-  //     offset: ["start start", "0.6 end"],
-  //   });
-
+const Footer = ({ footerContent }: FooterProps) => {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const checkIsDesktop = () => {
@@ -58,16 +29,32 @@ const Footer = ({ siteHeaders }: FooterProps) => {
     return () => window.removeEventListener("resize", checkIsDesktop);
   }, []);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Create social links from CMS data
+  const socialLinks = footerContent
+    ? [
+        {
+          name: "Instagram",
+          url: footerContent.instagramUrl,
+          icon: Instagram,
+          ariaLabel: "Follow us on Instagram",
+        },
+        {
+          name: "LinkedIn",
+          url: footerContent.linkedinUrl,
+          icon: Linkedin,
+          ariaLabel: "Follow us on LinkedIn",
+        },
+      ]
+    : [];
 
   return (
     <>
       <div
-        className={`w-full overflow-clip   relative justify-between flex flex-col  md:w-[200rem] max-w-full mx-auto font-medium md:pt-0 pt-[30vw]  md:min-h-[150vh] ${NeueMontreal.className}`}
+        className={`w-full overflow-clip relative justify-between flex flex-col md:w-[200rem] max-w-full mx-auto font-medium md:pt-0 pt-[30vw] md:min-h-[150vh] ${NeueMontreal.className}`}
       >
         <a
           href="https://www.malkain.com"
-          className={`hover:text-white absolute bottom-5 z-[1000] right-[50%] md:translate-x-0 translate-x-[50%] md:right-5 font-medium  underline underline-offset-4  capitalize text-xs md:text-sm text-white/50 `}
+          className={`hover:text-white absolute bottom-5 z-[1000] right-[50%] md:translate-x-0 translate-x-[50%] md:right-5 font-medium underline underline-offset-4 capitalize text-xs md:text-sm text-white/50`}
         >
           Designed and developed by Malkain
         </a>
@@ -91,13 +78,13 @@ const Footer = ({ siteHeaders }: FooterProps) => {
 
           {/* Heading */}
           <h2 className="text-4xl md:text-6xl font-medium mb-4">
-            Simple. Fast. Easy.
+            {footerContent?.ctaHeading || "Simple. Fast. Easy."}
           </h2>
 
           {/* Subtext */}
-          <p className="text-white/60 text-balance leading-[120%] text-base font-medium  md:text-lg mb-6 max-w-xl">
-            ROOZ keeps the process simple — no phone bans, no confiscation, no
-            conflict.
+          <p className="text-white/60 text-balance leading-[120%] text-base font-medium md:text-lg mb-6 max-w-xl">
+            {footerContent?.ctaDescription ||
+              "ROOZ keeps the process simple — no phone bans, no confiscation, no conflict."}
           </p>
 
           {/* CTA Button */}
@@ -105,57 +92,55 @@ const Footer = ({ siteHeaders }: FooterProps) => {
             onClick={() => setIsModalOpen(true)}
             className="bg-gradient-to-r from-pink-500 cursor-pointer to-[#FF004C] px-10 py-4 rounded-full text-white text-base md:text-lg font-medium hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105"
           >
-            GET IN TOUCH
+            {footerContent?.ctaButtonText || "GET IN TOUCH"}
           </button>
         </div>
 
-        <div className="w-full md:bg-transparent  bg-[#1F1F1F] z-[100]  flex relative py-14 ">
-          {/* <motion.div className="w-[70%]  absolute  mx-auto md:hidden left-[50%] translate-x-[-50%]">
-            <Image src={teddy} alt="background" className=" h-auto w-full " />
-          </motion.div> */}
-
-          <div className=" w-full absolute top-[-25%] md:top-[-60%] ">
-            <Image src={bg} alt="background" className="w-full h-auto " />
+        <div className="w-full md:bg-transparent bg-[#1F1F1F] z-[100] flex relative py-14">
+          <div className="w-full absolute top-[-25%] md:top-[-60%]">
+            <Image src={bg} alt="background" className="w-full h-auto" />
           </div>
-          <div className="max-w-7xl  z-[10] mx-auto flex flex-col items-center justify-center text-center md:space-y-3">
+          <div className="max-w-7xl z-[10] mx-auto flex flex-col items-center justify-center text-center md:space-y-3">
             {/* Logo */}
             <div className="flex justify-center">
               <Image
                 src={logo}
                 alt="ROOZ Logo"
-                className="w-32 md:w-40  h-auto"
+                className="w-32 md:w-40 h-auto"
               />
             </div>
 
             {/* Tagline */}
             <h2 className="text-sm font-medium">
-              Secure focus. Stronger learning
+              {footerContent?.tagline || "Secure focus. Stronger learning"}
             </h2>
 
-            <div className="flex  text-base mt-10 md:mt-16 gap-2 flex-col">
+            <div className="flex text-base mt-10 md:mt-16 gap-2 flex-col">
               {/* Email Link */}
               <a
-                href="mailto:hello@myrooz.com"
-                className="text-white  hover:text-pink-500 transition-colors underline"
+                href={`mailto:${footerContent?.email || "hello@myrooz.com"}`}
+                className="text-white hover:text-pink-500 transition-colors underline"
               >
-                <i className=" bi bi-envelope-fill mr-2"></i>
-                hello@myrooz.com
+                <i className="bi bi-envelope-fill mr-2"></i>
+                {footerContent?.email || "hello@myrooz.com"}
               </a>
 
-              {/* Copyright */}
+              {/* Address */}
               <p className="text-white">
                 <i className="bi bi-geo-alt mr-2"></i>
-                200 South Andrews Ave, Suite 504
+                {footerContent?.addressLine1 ||
+                  "200 South Andrews Ave, Suite 504"}
                 <br />
-                Fort Lauderdale, FL 33301
+                {footerContent?.addressLine2 || "Fort Lauderdale, FL 33301"}
               </p>
 
+              {/* Phone */}
               <a
-                href="tel:+19548001118"
-                className="text-white underline underline-offset-4 "
+                href={`tel:${footerContent?.phoneLink || "+19548001118"}`}
+                className="text-white underline underline-offset-4"
               >
-                <i className=" bi bi-telephone mr-2"></i>
-                +1 (954) 800-1118
+                <i className="bi bi-telephone mr-2"></i>
+                {footerContent?.phone || "+1 (954) 800-1118"}
               </a>
 
               {/* Social Media Icons */}

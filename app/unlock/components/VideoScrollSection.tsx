@@ -17,8 +17,24 @@ import { Volume2, VolumeX } from "lucide-react";
 import SlowCharacterReveal from "@/app/components/SlowCharacterReveal";
 import { IframeModal } from "@/app/components/iframe-modal";
 import ActionCards from "./ActionCards";
+import {
+  SanityActionCard,
+  SanityBookDemoSection,
+  SanityEvent,
+  SanityVideoScrollContent,
+} from "@/app/sanity/lib/types";
 
-const VideoScrollSection = () => {
+const VideoScrollSection = ({
+  events,
+  actionCards,
+  bookDemoSection,
+  videoScrollContent,
+}: {
+  events: SanityEvent[];
+  actionCards: SanityActionCard[];
+  bookDemoSection: SanityBookDemoSection;
+  videoScrollContent: SanityVideoScrollContent;
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -177,9 +193,9 @@ const VideoScrollSection = () => {
       )}
       <div className=" flex flex-col md:px-4 ">
         <div className="w-full min-h-[80vh]  mx-auto max-w-4xl sticky  top-[13vh] md:top-[10vh] bg-black flex items-center  ">
-          <div className="flex flex-col-reverse w-full md:flex-row   items-center gap-6 md:gap-16 max-w-6xl">
+          <div className="flex flex-col-reverse border2 w-full md:flex-row   items-center gap-6 md:gap-16 max-w-6xl">
             {/* Phone Pouch Image */}
-            <div className="relative w-full ">
+            <div className="relative border2 w-full ">
               <Image
                 src={hero}
                 alt="ROOZ Phone Pouch"
@@ -188,15 +204,26 @@ const VideoScrollSection = () => {
             </div>
 
             {/* Text Card */}
-            <div className="bg-[#1C1C1C]  text-center  rounded-[45px] md:px-16  px-10 py-10">
+            <div className="bg-[#1C1C1C] border2 text-center rounded-[45px] md:px-16 px-10 py-10">
               <p className="text-sm font-bold uppercase tracking-widest text-white/50 mb-3">
-                ROOZ
+                {videoScrollContent?.heroLabel || "ROOZ"}
               </p>
               <h2
-                className={` ${HelveticaNeue.className} text-4xl md:text-5xl  text-center font-normal max-w-xl text-white leading-[100%]`}
+                className={`${HelveticaNeue.className} text-4xl md:text-5xl text-center font-normal max-w-2xl text-white  leading-[100%]`}
               >
-                This Rooz is <br className="md:hidden" />
-                locked on purpose
+                {videoScrollContent?.heroHeading.split("\\n").map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i <
+                      videoScrollContent.heroHeading.split("\\n").length -
+                        1 && <br />}
+                  </span>
+                )) || (
+                  <>
+                    This Rooz is <br className="md:hidden" />
+                    locked on purpose
+                  </>
+                )}
               </h2>
             </div>
           </div>
@@ -244,18 +271,25 @@ const VideoScrollSection = () => {
           <div className="w-full h-[20%] blur-3xl  z-[2]   bg-black absolute top-0 left-0"></div>
 
           <div
-            className={`text-center  z-[10]  font-medium md:mt-40 ${NeueMontreal.className}`}
+            className={`text-center  z-[10] font-medium md:mt-40 ${NeueMontreal.className}`}
           >
             <h3
-              className={`text-3xl font-medium md:text-5xl  mb-4 ${HelveticaNeue.className}`}
+              className={`text-3xl font-medium md:text-5xl mb-4 ${HelveticaNeue.className}`}
             >
-              Book a 10 <br /> minute demo
+              {bookDemoSection.heading.split("\\n").map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < bookDemoSection.heading.split("\\n").length - 1 && (
+                    <br />
+                  )}
+                </span>
+              ))}
             </h3>
 
             <p
-              className={`text-xl w-[17rem] font-medium mx-auto max-w-full leading-[120%] `}
+              className={`text-xl w-[17rem] font-medium mx-auto max-w-full leading-[120%]`}
             >
-              {"We’ll show you how the pouch unlocks and share what’s inside"}
+              {bookDemoSection.description}
             </p>
 
             <div className="mt-6">
@@ -265,11 +299,12 @@ const VideoScrollSection = () => {
                 }}
                 className="px-10 capitalize font-bold py-3 cursor-pointer bg-gradient-to-r from-pink-500 to-pink-600 rounded-full hover:from-pink-600 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg shadow-pink-500/50"
               >
-                Book Now
+                {bookDemoSection.buttonText}
               </button>
             </div>
           </div>
-          <ActionCards />
+          <ActionCards events={events} actionCards={actionCards} />
+
           <div
             ref={containerRef}
             className={`w-full  relative z-[10] h-[200vh]   text-white pb-30 md:pb-40 ${NeueMontreal.className}`}
@@ -278,9 +313,22 @@ const VideoScrollSection = () => {
             <div className="flex justify-center z-[10]  items-center sticky top-0 h-screen">
               <div className="relative w-full z-[10] h-screen">
                 <div
-                  className={`  w-full absolute text-center left-1/2 -translate-x-1/2 md:translate-y-[-10%] translate-y-[-10%] top-[28%] z-[10] text-3xl  md:text-5xl ${HelveticaNeue.className}`}
+                  className={`w-full absolute text-center left-1/2 -translate-x-1/2 md:translate-y-[-10%] translate-y-[-10%] top-[28%] z-[10] text-3xl md:text-5xl ${HelveticaNeue.className}`}
                 >
-                  Watch a quick tutorial <br /> on how to use rooz
+                  {videoScrollContent?.videoHeading
+                    .split("\\n")
+                    .map((line, i) => (
+                      <span key={i}>
+                        {line}
+                        {i <
+                          videoScrollContent.videoHeading.split("\\n").length -
+                            1 && <br />}
+                      </span>
+                    )) || (
+                    <>
+                      Watch a quick tutorial <br /> on how to use rooz
+                    </>
+                  )}
                 </div>
                 {/* Image with radial mask DESKTOP SECTION */}
                 {/* Image with radial mask DESKTOP SECTION */}

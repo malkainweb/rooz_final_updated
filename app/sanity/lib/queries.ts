@@ -93,3 +93,89 @@ export async function getWhyChooseUsCards(): Promise<SanityWhyChooseUsCard[]> {
 
   return await client.fetch(query);
 }
+
+export async function getComparisonRows() {
+  return client.fetch(
+    `*[_type == "comparisonRow"] | order(order asc) {
+      _id,
+      order,
+      feature,
+      rooz,
+      otherBrands
+    }`
+  );
+}
+
+// app/sanity/lib/queries.ts (add to existing file)
+
+export async function getEvents() {
+  return client.fetch(
+    `*[_type == "event"] | order(order asc) {
+      _id,
+      order,
+      eventName,
+      venue,
+      date
+    }`
+  );
+}
+
+// app/sanity/lib/queries.ts
+export async function getActionCards() {
+  return client.fetch(
+    `*[_type == "actionCard"] | order(order asc) {
+      _id,
+      order,
+      "imageUrl": image.asset->url,
+      imageAlt,
+      title,
+      description,
+      buttonText,
+      actionType
+    }`
+  );
+}
+
+// app/sanity/lib/queries.ts
+export async function getBookDemoSection() {
+  return client.fetch(
+    `*[_type == "bookDemoSection"][0] {
+      _id,
+      heading,
+      description,
+      buttonText
+    }`
+  );
+}
+
+// app/sanity/lib/queries.ts
+export async function getFooterContent() {
+  return client.fetch(
+    `*[_type == "footerContent"][0] {
+      _id,
+      ctaHeading,
+      ctaDescription,
+      ctaButtonText,
+      tagline,
+      email,
+      addressLine1,
+      addressLine2,
+      phone,
+      phoneLink,
+      instagramUrl,
+      linkedinUrl
+    }`
+  );
+}
+
+// app/sanity/lib/queries.ts
+export async function getVideoScrollContent() {
+  return client.fetch(
+    `*[_type == "videoScrollContent"][0] {
+      _id,
+      heroLabel,
+      heroHeading,
+      videoHeading
+    }`
+  );
+}
