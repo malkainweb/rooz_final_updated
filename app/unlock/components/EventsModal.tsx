@@ -77,7 +77,7 @@ const EventsModal = ({ isOpen, onClose, events }: EventsModalProps) => {
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 z-50 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all backdrop-blur-sm"
+              className="md:absolute top-6 mx-auto mt-5 md:mt-0 md:mx-0 right-6 z-50 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all backdrop-blur-sm"
             >
               <X className="w-5 h-5 text-white" />
             </button>
@@ -89,7 +89,7 @@ const EventsModal = ({ isOpen, onClose, events }: EventsModalProps) => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className={`text-3xl md:text-5xl font-normal text-center mb-10 text-white ${HelveticaNeue.className}`}
+                className={`text-2xl md:text-5xl font-normal text-center mb-10 text-white ${HelveticaNeue.className}`}
               >
                 Unlock it in person if we're
                 <br />
