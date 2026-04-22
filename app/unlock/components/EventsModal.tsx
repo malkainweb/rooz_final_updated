@@ -83,7 +83,7 @@ const EventsModal = ({ isOpen, onClose, events }: EventsModalProps) => {
             </button>
 
             {/* Content */}
-            <div className="relative z-10 p-8 md:p-12 overflow-y-auto max-h-[90vh]">
+            <div className="relative z-10 p-4 md:p-12 overflow-y-auto max-h-[90vh]">
               {/* Heading */}
               <motion.h2
                 initial={{ opacity: 0, y: -20 }}
